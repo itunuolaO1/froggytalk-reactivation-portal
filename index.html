@@ -63,7 +63,6 @@
             overflow-x: hidden;
         }
 
-        /* Reading Progress Bar */
         #progress-bar {
             position: fixed;
             top: 0;
@@ -166,7 +165,6 @@
             flex-grow: 1;
         }
 
-        /* Fixed Home Nav Item */
         .fixed-home-item {
             display: flex;
             align-items: center;
@@ -187,7 +185,6 @@
             border-left-color: var(--primary);
         }
 
-        /* Accordion Dropdown Styles */
         .sidebar-dropdown {
             border-top: 1px solid var(--border-color);
         }
@@ -262,7 +259,6 @@
             text-align: center;
         }
 
-        /* FULL WIDTH MAIN WRAPPER FIX */
         .main-wrapper {
             margin-left: var(--sidebar-width);
             flex-grow: 1;
@@ -295,7 +291,6 @@
             cursor: pointer;
         }
 
-        /* Search Results Overlay */
         .search-results-panel {
             display: none;
             background: var(--card-bg);
@@ -405,7 +400,6 @@
             pointer-events: none;
         }
 
-        /* Roadmap Steps - Responsive Fluid */
         .roadmap-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -451,7 +445,6 @@
             color: var(--text-main);
         }
 
-        /* Main Resource Cards Grid - Responsive Fluid */
         .main-resources-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -525,7 +518,6 @@
             gap: 6px;
         }
 
-        /* Buttons */
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -603,7 +595,6 @@
             width: 100%;
         }
 
-        /* Objectives */
         .objective-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -640,7 +631,6 @@
             color: var(--text-main);
         }
 
-        /* Checklists */
         .checklist-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -709,7 +699,6 @@
             gap: 12px;
         }
 
-        /* Timeline */
         .timeline {
             position: relative;
             padding-left: 30px;
@@ -778,7 +767,6 @@
             font-weight: 600;
         }
 
-        /* Benefits & Pricing */
         .pricing-card {
             background: var(--card-bg);
             border: 2px solid var(--border-color);
@@ -847,7 +835,6 @@
             border-left: 3px solid var(--warning);
         }
 
-        /* Payroll Card */
         .payroll-card {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: white;
@@ -902,7 +889,6 @@
             color: #e2e8f0;
         }
 
-        /* Video Card component in Onboarding Guide */
         .video-card-inline {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -937,7 +923,6 @@
             flex-shrink: 0;
         }
 
-        /* Features & Workbook */
         .feature-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -999,7 +984,6 @@
             box-shadow: 0 6px 16px rgba(16, 124, 65, 0.3);
         }
 
-        /* Rules Split */
         .rules-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1049,7 +1033,6 @@
         .rule-card.dos li i { color: var(--primary); margin-top: 4px; }
         .rule-card.donts li i { color: var(--danger); margin-top: 4px; }
 
-        /* Quick Access Cards Grid - Responsive Fluid */
         .quick-access-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1093,7 +1076,6 @@
             font-weight: 600;
         }
 
-        /* Script Flow */
         .script-flow {
             display: flex;
             flex-direction: column;
@@ -1206,7 +1188,74 @@
             border-left: 3px solid var(--secondary);
         }
 
-        /* Feature Cards Full */
+        .tab-btn {
+            padding: 10px 20px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pricing-tab-content {
+            display: none;
+        }
+
+        .pricing-tab-content.active {
+            display: block;
+        }
+
+        .table-responsive-container {
+            width: 100%;
+            overflow-x: auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin-top: 16px;
+        }
+
+        .rates-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .rates-table th, .rates-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .rates-table th {
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .rates-table td:first-child, .rates-table th:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .rates-table tbody tr:hover {
+            background: var(--primary-light);
+        }
+
         .feature-card-full {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -1225,7 +1274,6 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* Clickable Card Hover */
         .clickable-feature {
             transition: var(--transition);
         }
@@ -1263,7 +1311,6 @@
             line-height: 1.6;
         }
 
-        /* Currency Pills */
         .currency-tag {
             background: var(--primary-light);
             color: var(--primary);
@@ -1274,7 +1321,6 @@
             display: inline-block;
         }
 
-        /* Bill Countries Grid System - Responsive Fluid */
         .bill-countries-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -1326,7 +1372,6 @@
             border-radius: 10px;
         }
 
-        /* Search & Promotional Destinations - Responsive Fluid */
         .promo-search-wrapper {
             position: relative;
             margin-bottom: 24px;
@@ -1430,7 +1475,6 @@
             width: 100%;
         }
 
-        /* Questions */
         .question-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -1475,7 +1519,6 @@
             white-space: nowrap;
         }
 
-        /* FAQs */
         .accordion-item {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -1526,7 +1569,6 @@
             line-height: 1.7;
         }
 
-        /* Objections */
         .objection-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -1585,7 +1627,6 @@
             line-height: 1.6;
         }
 
-        /* Closing */
         .closing-card {
             background: linear-gradient(135deg, #00A86B 0%, #008f5a 100%);
             color: white;
@@ -1619,7 +1660,6 @@
             border-left: 4px solid var(--secondary);
         }
 
-        /* Escalation */
         .escalation-tree {
             display: flex;
             flex-direction: column;
@@ -1663,40 +1703,79 @@
             color: #991B1B;
         }
 
-        /* Tips */
         .tip-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             padding: 24px;
-            text-align: center;
+            text-align: left;
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
+            cursor: pointer;
         }
 
         .tip-card:hover {
-            transform: translateY(-4px);
             border-color: var(--primary);
             box-shadow: var(--shadow-md);
         }
 
-        .tip-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-light);
-            color: var(--primary);
-            border-radius: 50%;
+        .tip-card-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin: 0 auto 16px auto;
+            justify-content: space-between;
         }
 
-        .tip-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-main);
+        .tip-card-title-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .tip-card .tip-icon {
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .tip-card-chevron {
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-card.open .tip-card-chevron {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+
+        .tip-card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+        }
+
+        .tip-card.open .tip-card-content {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tip-card-body {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .tip-card-body ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .tip-card-body li {
+            margin-bottom: 6px;
+        }
+
+        .tip-card-body li:last-child {
+            margin-bottom: 0;
         }
 
         .cta-card {
@@ -1743,7 +1822,6 @@
             background: #f8fafc;
         }
 
-        /* Modals & Loading State */
         .modal-backdrop {
             position: fixed;
             top: 0;
@@ -1862,7 +1940,6 @@
             z-index: 2;
         }
 
-        /* Promo Modal Information Cards */
         .promo-modal-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -1931,7 +2008,6 @@
             margin: 0;
         }
 
-        /* Floating Back to Top */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -2002,6 +2078,10 @@
                 text-align: center;
             }
 
+            .bill-countries-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .grid-two {
                 grid-template-columns: 1fr;
             }
@@ -2030,6 +2110,10 @@
             }
 
             .promo-modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bill-countries-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -2730,10 +2814,107 @@
                 <h2 class="section-title"><i class="fa-solid fa-ear-listen"></i> 💡 Active Listening Guidance</h2>
                 <p class="section-desc">Tailor your responses based on specific customer situations:</p>
                 <div class="grid-two">
-                    <div class="guidance-card">
+                    <div class="guidance-card" style="grid-column: 1 / -1;">
                         <div class="guidance-situation"><i class="fa-solid fa-tags" style="color: var(--warning);"></i> Pricing Concerns</div>
-                        <div class="guidance-response">Explain that FroggyTalk regularly runs promotions (especially on weekends) and encourage them to check the latest rates.</div>
+                        <div class="guidance-response">
+                            <p style="margin-bottom: 12px;">Explain that FroggyTalk regularly runs promotions—especially on weekends—and always encourage customers to check the latest promotions.</p>
+                            
+                            <!-- Tabs Navigation -->
+                            <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                                <button class="tab-btn active" onclick="switchPricingTab('promo-rates-tab')"><i class="fa-solid fa-bolt"></i> Promotional Rates</button>
+                                <button class="tab-btn" onclick="switchPricingTab('standard-rates-tab')"><i class="fa-solid fa-table"></i> Standard Rates</button>
+                            </div>
+
+                            <!-- Tab 1: Promotional Rates -->
+                            <div id="promo-rates-tab" class="pricing-tab-content active">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px;">
+                                    <div style="background: var(--card-bg); padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                        <div style="font-weight: 700; color: var(--text-main);">🇳🇬 Nigeria</div>
+                                        <div style="font-size: 14px; color: var(--primary); font-weight: 600;">€10 = 2 hours (120 mins)</div>
+                                    </div>
+                                    <div style="background: var(--card-bg); padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                        <div style="font-weight: 700; color: var(--text-main);">🇪🇹 Ethiopia</div>
+                                        <div style="font-size: 14px; color: var(--primary); font-weight: 600;">€10 = 70 minutes</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab 2: Standard Rates Table -->
+                            <div id="standard-rates-tab" class="pricing-tab-content">
+                                <div class="table-responsive-container">
+                                    <table class="rates-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Destination</th>
+                                                <th>EUR</th>
+                                                <th>CAD</th>
+                                                <th>SEK</th>
+                                                <th>GBP</th>
+                                                <th>NOK</th>
+                                                <th>DKK</th>
+                                                <th>USD</th>
+                                                <th>SAR</th>
+                                                <th>AUD</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Ethiopia (Landline & Mobile)</td><td>0.22</td><td>0.36</td><td>2.57</td><td>0.19</td><td>2.60</td><td>1.64</td><td>0.26</td><td>0.96</td><td>-</td></tr>
+                                            <tr><td>Eritrea (Landline & Mobile)</td><td>0.24</td><td>0.39</td><td>2.80</td><td>0.21</td><td>2.84</td><td>1.79</td><td>0.28</td><td>1.04</td><td>-</td></tr>
+                                            <tr><td>Nigeria (Landline & Mobile)</td><td>0.12</td><td>0.19</td><td>1.40</td><td>0.10</td><td>1.42</td><td>0.90</td><td>0.14</td><td>0.52</td><td>-</td></tr>
+                                            <tr><td>Sudan (Landline & Mobile)</td><td>0.32</td><td>0.52</td><td>3.74</td><td>0.28</td><td>3.79</td><td>2.39</td><td>0.38</td><td>1.39</td><td>-</td></tr>
+                                            <tr><td>Cameroon (Landline & Mobile)</td><td>0.33</td><td>0.54</td><td>3.86</td><td>0.29</td><td>3.91</td><td>2.46</td><td>0.39</td><td>1.43</td><td>-</td></tr>
+                                            <tr><td>South Sudan (Landline)</td><td>0.42</td><td>0.68</td><td>4.91</td><td>0.36</td><td>4.97</td><td>3.13</td><td>0.50</td><td>1.82</td><td>-</td></tr>
+                                            <tr><td>South Sudan (Mobile)</td><td>0.40</td><td>0.65</td><td>4.67</td><td>0.35</td><td>4.73</td><td>2.98</td><td>0.47</td><td>1.74</td><td>-</td></tr>
+                                            <tr><td>DR Congo (Landline & Mobile)</td><td>0.32</td><td>0.52</td><td>3.74</td><td>0.28</td><td>3.79</td><td>2.39</td><td>0.38</td><td>1.39</td><td>-</td></tr>
+                                            <tr><td>Ghana (Landline & Mobile)</td><td>0.24</td><td>0.39</td><td>2.80</td><td>0.21</td><td>2.84</td><td>1.79</td><td>0.28</td><td>1.04</td><td>-</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Call Cost Calculator -->
+                            <div style="margin-top: 20px; background: var(--card-bg); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                                <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 12px; color: var(--text-main);"><i class="fa-solid fa-calculator" style="color: var(--primary);"></i> Interactive Call Cost Calculator</h4>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 12px;">
+                                    <div>
+                                        <label style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Destination</label>
+                                        <select id="calc-dest" onchange="calculateCallCost()" style="width: 100%; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-family: inherit;">
+                                            <option value="0.22">Ethiopia (Landline & Mobile)</option>
+                                            <option value="0.24">Eritrea (Landline & Mobile)</option>
+                                            <option value="0.12">Nigeria (Landline & Mobile)</option>
+                                            <option value="0.32">Sudan (Landline & Mobile)</option>
+                                            <option value="0.33">Cameroon (Landline & Mobile)</option>
+                                            <option value="0.42">South Sudan (Landline)</option>
+                                            <option value="0.40">South Sudan (Mobile)</option>
+                                            <option value="0.32">DR Congo (Landline & Mobile)</option>
+                                            <option value="0.24">Ghana (Landline & Mobile)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Currency</label>
+                                        <select id="calc-curr" onchange="calculateCallCost()" style="width: 100%; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-family: inherit;">
+                                            <option value="EUR">EUR (€)</option>
+                                            <option value="CAD">CAD ($)</option>
+                                            <option value="SEK">SEK (kr)</option>
+                                            <option value="GBP">GBP (£)</option>
+                                            <option value="NOK">NOK (kr)</option>
+                                            <option value="DKK">DKK (kr)</option>
+                                            <option value="USD">USD ($)</option>
+                                            <option value="SAR">SAR (SR)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Amount</label>
+                                        <input type="number" id="calc-amount" value="10" oninput="calculateCallCost()" style="width: 100%; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-family: inherit;">
+                                    </div>
+                                </div>
+                                <div id="calc-result" style="font-weight: 700; color: var(--primary); font-size: 15px; background: var(--primary-light); padding: 10px 14px; border-radius: var(--radius-sm);">
+                                    €10 gives approximately 45.5 minutes.
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="guidance-card">
                         <div class="guidance-situation"><i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i> Past Technical Issues</div>
                         <div class="guidance-response">Apologize for their previous experience and highlight that significant performance improvements have been made.</div>
@@ -2783,7 +2964,7 @@
                         </div>
                     </div>
                     
-                    <!-- Updated Interactive Bill Payments Card -->
+                    <!-- Interactive Bill Payments Card -->
                     <div class="feature-card-full clickable-feature" id="openBillPaymentsBtn" style="cursor: pointer; position: relative;">
                         <div class="feature-icon-lg"><i class="fa-solid fa-file-invoice-dollar"></i></div>
                         <div class="feature-details" style="flex-grow: 1;">
@@ -2917,7 +3098,25 @@
 
                 <div class="accordion-item">
                     <button class="accordion-header"><span>Do I need to buy anything first?</span><i class="fa-solid fa-chevron-down"></i></button>
-                    <div class="accordion-content"><div class="accordion-body">No purchase is required to use your 2 free calling minutes. Simply update the app and place your call.</div></div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="margin-bottom: 16px;">No purchase is required. Customers can use their free promotional minutes first. If they'd like to continue calling afterwards, they can purchase call credit at any time.</p>
+                            
+                            <!-- How to Buy Call Credit Card -->
+                            <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; margin-top: 8px;">
+                                <div style="font-weight: 700; color: var(--text-main); font-size: 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fa-solid fa-cart-shopping" style="color: var(--primary);"></i> How to Buy Call Credit
+                                </div>
+                                <ol style="padding-left: 20px; font-size: 14px; line-height: 1.8; color: var(--text-muted);">
+                                    <li>Open the FroggyTalk app.</li>
+                                    <li>Tap "Buy Credit" on the homepage.</li>
+                                    <li>Select your preferred amount.</li>
+                                    <li>Choose your preferred payment method.</li>
+                                    <li>Complete the payment.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="accordion-item">
@@ -2957,12 +3156,43 @@
 
                 <div class="objection-card">
                     <div class="objection-left"><div class="col-label">Customer Says</div><div class="objection-text">"Your rates are too expensive."</div></div>
-                    <div class="objection-right"><div class="col-label">Suggested Response</div><div class="response-text">"I understand. We've actually introduced regular weekend promotions and special rates for key destinations. You can use your 2 free minutes first to test out our improved service!"</div></div>
+                    <div class="objection-right">
+                        <div class="col-label">Suggested Response</div>
+                        <div class="response-text">
+                            <p style="margin-bottom: 12px;">"We completely understand. We regularly run promotions—especially on weekends—to help customers get even better value."</p>
+                            
+                            <div style="background: #FEF3C7; border-left: 4px solid var(--warning); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 12px;">
+                                <div style="font-weight: 700; color: #92400E; font-size: 13px; margin-bottom: 4px;"><i class="fa-solid fa-star"></i> Current Promotion Example</div>
+                                <div style="font-size: 14px; color: #78350F;">"We currently have a Sunday promotion for Ethiopia where customers can get 70 minutes for just €10."</div>
+                            </div>
+
+                            <div style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: var(--radius-sm); font-size: 13px; color: var(--text-muted);">
+                                <i class="fa-solid fa-lightbulb" style="color: var(--primary);"></i> <strong>Agent Guidance:</strong> Always mention any current promotion that applies to the customer's preferred destination. This helps reinforce FroggyTalk in the customer's mind, even if they don't purchase today.
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- UPDATE 1: I DON'T CALL AFRICA ANYMORE -->
                 <div class="objection-card">
                     <div class="objection-left"><div class="col-label">Customer Says</div><div class="objection-text">"I don't call Africa anymore."</div></div>
-                    <div class="objection-right"><div class="col-label">Suggested Response</div><div class="response-text">"No problem at all! If your calling needs ever change, your account remains open, and you can also use FroggyTalk features like Bill Payments and live Radio."</div></div>
+                    <div class="objection-right">
+                        <div class="col-label">Suggested Response</div>
+                        <div class="response-text">
+                            <!-- Two-step Conversation Flow -->
+                            <div style="background: #F0FDF4; border-left: 4px solid var(--primary); padding: 14px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 12px;">
+                                <div style="font-weight: 700; color: var(--primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Step 1: Initial Response</div>
+                                <div style="font-size: 14px; color: #064E3B; margin-bottom: 8px;">"Thank you for letting me know."</div>
+                                <div style="font-size: 14px; color: #064E3B;">"Just to mention, FroggyTalk isn't only for calling Africa. You can also use FroggyTalk to make affordable international calls to many destinations outside Africa."</div>
+                                <div style="font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 8px;">(If the customer is interested, briefly explain the available destinations and continue the conversation naturally.)</div>
+                            </div>
+
+                            <div style="background: var(--bg-main); border-left: 4px solid var(--text-muted); padding: 14px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+                                <div style="font-weight: 700; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Step 2: If Customer Still Doesn't Make International Calls</div>
+                                <div style="font-size: 14px; color: var(--text-main);">"Thank you for your time. If your calling needs ever change, we'd be delighted to welcome you back. We hope FroggyTalk will be your first choice whenever you need to make an international call."</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="objection-card">
@@ -3003,8 +3233,22 @@
             <!-- Escalation Guide -->
             <section id="escalation">
                 <h2 class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> 🚨 Escalation Guide</h2>
-                <p class="section-desc">Escalate directly to Customer Support if the customer:</p>
+                <p class="section-desc">If the issue requires further investigation or cannot be resolved during the call, immediately escalate the customer to Customer Support.</p>
                 
+                <div style="background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+                    <h3 style="font-size: 18px; color: #991B1B; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-circle-exclamation"></i> Agent Escalation Protocol
+                    </h3>
+                    <p style="font-size: 15px; color: #7F1D1D; margin-bottom: 12px;">Agents should:</p>
+                    <ul style="padding-left: 20px; font-size: 15px; color: #7F1D1D; line-height: 1.8;">
+                        <li>Record all relevant details in the workbook.</li>
+                        <li>Tag: <strong style="background: #FEE2E2; padding: 2px 8px; border-radius: 4px; font-family: monospace;">@eden.gebrekirstos@froggytalk.com</strong> within the workbook.</li>
+                    </ul>
+                    <div style="margin-top: 12px; font-size: 14px; color: #991B1B; background: rgba(255,255,255,0.6); padding: 12px; border-radius: var(--radius-sm);">
+                        <i class="fa-solid fa-info-circle"></i> Eden will review the case, assign it to the appropriate Customer Support team and ensure follow-up with the customer.
+                    </div>
+                </div>
+
                 <div class="escalation-tree">
                     <div class="escalation-card"><div class="escalation-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></div><div class="escalation-text">Cannot update the app.</div></div>
                     <div class="escalation-card"><div class="escalation-icon"><i class="fa-solid fa-right-to-bracket"></i></div><div class="escalation-text">Cannot log in.</div></div>
@@ -3030,18 +3274,182 @@
                 </div>
             </section>
 
-            <!-- Quick Calling Tips -->
+            <!-- UPDATE 2: EXPANDABLE QUICK CALLING TIPS -->
             <section id="tips">
                 <h2 class="section-title"><i class="fa-solid fa-lightbulb"></i> 💡 Quick Calling Tips</h2>
                 <div class="grid-three">
-                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-comment-dots"></i></div><div class="tip-title">Be Natural</div></div>
-                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-anchor"></i></div><div class="tip-title">Hook Early</div></div>
-                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-ear-listen"></i></div><div class="tip-title">Listen Actively</div></div>
-                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-sliders"></i></div><div class="tip-title">Tailor the Conversation</div></div>
-                    <div class="tip-card"><div class="tip-icon"><i class="fa-regular fa-clock"></i></div><div class="tip-title">Timing</div></div>
-                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-smile"></i></div><div class="tip-title">Polite Finish</div></div>
-                    <div class="tip-card"><div class="tip-icon"><i class="fa-brands fa-whatsapp"></i></div><div class="tip-title">Promote WhatsApp</div></div>
-                </div>
+                    <!-- Tip 1: Be Natural -->
+                    <div class="tip-card" onclick="toggleTipCard(this)">
+                        <div class="tip-card-header">
+                            <div class="tip-card-title-group">
+                                <div class="tip-icon"><i class="fa-solid fa-comment-dots"></i></div>
+                                <div class="tip-title">Be Natural</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down tip-card-chevron"></i>
+                        </div>
+                        <div class="tip-card-content">
+                            <div class="tip-card-body">
+                                <ul>
+                                    <li>Speak as though you're having a normal conversation.</li>
+                                    <li>Avoid sounding like you're reading a script.</li>
+                                    <li>Smile while talking—it naturally improves your tone of voice.</li>
+                                    <li>Pause naturally and don't rush through your sentences.</li>
+                                    <li>Build rapport before moving into the main purpose of the call.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 2: Hook Early -->
+                    <div class="tip-card" onclick="toggleTipCard(this)">
+                        <div class="tip-card-header">
+                            <div class="tip-card-title-group">
+                                <div class="tip-icon"><i class="fa-solid fa-anchor"></i></div>
+                                <div class="tip-title">Hook Early</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down tip-card-chevron"></i>
+                        </div>
+                        <div class="tip-card-content">
+                            <div class="tip-card-body">
+                                <p style="margin-bottom: 8px; font-weight: 600; color: var(--text-main);">Capture the customer's attention within the first few seconds.</p>
+                                <p style="margin-bottom: 6px; font-weight: 500;">Mention:</p>
+                                <ul>
+                                    <li>Who you are</li>
+                                    <li>Why you're calling</li>
+                                    <li>The free promotional minutes</li>
+                                </ul>
+                                <p style="margin-top: 8px; font-style: italic;">Keep your introduction under 20 seconds before asking your first question.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 3: Listen Actively -->
+                    <div class="tip-card" onclick="toggleTipCard(this)">
+                        <div class="tip-card-header">
+                            <div class="tip-card-title-group">
+                                <div class="tip-icon"><i class="fa-solid fa-ear-listen"></i></div>
+                                <div class="tip-title">Listen Actively</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down tip-card-chevron"></i>
+                        </div>
+                        <div class="tip-card-content">
+                            <div class="tip-card-body">
+                                <ul>
+                                    <li>Let customers finish speaking before responding.</li>
+                                    <li>Listen carefully for objections and opportunities.</li>
+                                    <li>Acknowledge their concerns before offering a solution.</li>
+                                    <li>Ask follow-up questions where appropriate.</li>
+                                    <li>Never interrupt.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 4: Tailor the Conversation -->
+                    <div class="tip-card" onclick="toggleTipCard(this)">
+                        <div class="tip-card-header">
+                            <div class="tip-card-title-group">
+                                <div class="tip-icon"><i class="fa-solid fa-sliders"></i></div>
+                                <div class="tip-title">Tailor the Conversation</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down tip-card-chevron"></i>
+                        </div>
+                        <div class="tip-card-content">
+                            <div class="tip-card-body">
+                                <p style="margin-bottom: 8px; font-weight: 600; color: var(--text-main);">Don't give every customer the exact same conversation.</p>
+                                <p style="margin-bottom: 6px; font-weight: 500;">Instead:</p>
+                                <ul>
+                                    <li>Adapt based on their previous calling habits.</li>
+                                    <li>Mention destination-specific promotions where relevant.</li>
+                                    <li>If they mention pricing, explain current offers.</li>
+                                    <li>Personalise the conversation whenever possible.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 5: Timing -->
+                    <div class="tip-card" onclick="toggleTipCard(this)">
+                        <div class="tip-card-header">
+                            <div class="tip-card-title-group">
+                                <div class="tip-icon"><i class="fa-regular fa-clock"></i></div>
+                                <div class="tip-title">Timing</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down tip-card-chevron"></i>
+                        </div>
+                        <div class="tip-card-content">
+                            <div class="tip-card-body">
+                                <p style="margin-bottom: 8px; font-weight: 600; color: var(--text-main);">Respect the customer's time.</p>
+                                <p style="margin-bottom: 6px; font-weight: 500;">Best practices:</p>
+                                <ul>
+                                    <li>Always work with the Timezones and call only between 8AM - 5PM Weekdays.</li>
+                                    <li>Avoid keeping customers on the phone unnecessarily.</li>
+                                    <li>Aim for around 2–5 minutes unless the customer wishes to continue.</li>
+                                    <li>If they're busy, ask whether there's a better time to call.</li>
+                                    <li>Never pressure customers into staying on the call.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 6: Polite Finish -->
+                    <div class="tip-card" onclick="toggleTipCard(this)">
+                        <div class="tip-card-header">
+                            <div class="tip-card-title-group">
+                                <div class="tip-icon"><i class="fa-solid fa-smile"></i></div>
+                                <div class="tip-title">Polite Finish</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down tip-card-chevron"></i>
+                        </div>
+                        <div class="tip-card-content">
+                            <div class="tip-card-body">
+                                <p style="margin-bottom: 8px; font-weight: 600; color: var(--text-main);">Always end every conversation professionally.</p>
+                                <ul>
+                                    <li>Thank the customer for their time.</li>
+                                    <li>Leave the conversation on a positive note.</li>
+                                    <li>Invite them back if their needs change.</li>
+                                    <li>Even if they decline today, ensure they leave with a positive impression of FroggyTalk.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- Tip 7: Offer WhatsApp Support -->
+                    <div class="tip-card" onclick="toggleTipCard(this)">
+                        <div class="tip-card-header">
+                            <div class="tip-card-title-group">
+                                <div class="tip-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                                <div class="tip-title">Offer WhatsApp Support</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down tip-card-chevron"></i>
+                        </div>
+                        <div class="tip-card-content">
+                            <div class="tip-card-body">
+                                <p style="margin-bottom: 12px; font-weight: 600; color: var(--text-main);">If the customer needs additional help or has questions that cannot be resolved during the call:</p>
+                                
+                                <!-- Styled WhatsApp Number Badge -->
+                                <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 14px 18px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);" onclick="event.stopPropagation();">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <i class="fa-brands fa-whatsapp" style="font-size: 24px;"></i>
+                                        <div>
+                                            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9; font-weight: 600;">Official Support Number</div>
+                                            <div style="font-size: 18px; font-weight: 700; letter-spacing: 0.5px;">+31 6 57848469</div>
+                                        </div>
+                                    </div>
+                                    <button onclick="navigator.clipboard.writeText('+31657848469'); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy', 2000);" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">
+                                        Copy
+                                    </button>
+                                </div>
+
+                                <ul>
+                                    <li>Offer to continue the conversation through FroggyTalk's official WhatsApp support.</li>
+                                    <li>Direct them to the official FroggyTalk WhatsApp Support number above if they require additional assistance.</li>
+                                    <li>Explain that Customer Support will be happy to assist further.</li>
+                                    <li>If necessary, escalate the issue following the Escalation Guide.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
             </section>
 
             <section id="next-steps">
@@ -3076,18 +3484,11 @@
             </p>
 
             <div class="video-container">
-                <!-- Video Loading Screen -->
                 <div class="video-loader" id="videoLoader">
                     <i class="fa-solid fa-circle-notch spinner"></i>
                     <span style="font-size: 14px; font-weight: 500;">Loading video, please wait...</span>
                 </div>
-                <iframe id="videoIframe" 
-                        src="about:blank" 
-                        allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen 
-                        onload="onVideoLoaded()">
-                </iframe>
+                <iframe id="videoIframe" src="about:blank" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen onload="onVideoLoaded()"></iframe>
             </div>
         </div>
     </div>
@@ -3152,7 +3553,6 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- Header -->
             <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
                 <div class="feature-icon-lg" style="width: 48px; height: 48px; font-size: 20px;"><i class="fa-solid fa-file-invoice-dollar"></i></div>
                 <div>
@@ -3161,7 +3561,6 @@
                 </div>
             </div>
 
-            <!-- Summary & Supported Currencies Cards -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
                 <div style="background: #F0FDF4; border: 1px solid rgba(0, 168, 107, 0.25); padding: 16px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 12px;">
                     <i class="fa-solid fa-circle-check" style="font-size: 24px; color: var(--primary);"></i>
@@ -3184,13 +3583,11 @@
                 </div>
             </div>
 
-            <!-- Search Input -->
             <div class="promo-search-wrapper" style="max-width: 100%; margin-bottom: 20px;">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 <input type="text" id="billSearchInput" class="promo-search-input" placeholder="Filter by country or currency (e.g., Nigeria, XOF, GHS...)" aria-label="Search supported countries or currencies">
             </div>
 
-            <!-- Countries Grid -->
             <div class="bill-countries-grid" id="billCountriesGrid">
                 
                 <div class="bill-country-card" data-country="benin" data-currency="xof">
@@ -3273,7 +3670,6 @@
 
             </div>
 
-            <!-- Information Callout -->
             <div class="callout-info" style="margin-top: 24px; background: #FFFBEB; border-color: #FDE68A; color: #92400E;">
                 <i class="fa-solid fa-circle-info" style="font-size: 20px; color: var(--warning);"></i>
                 <span>ℹ️ Bill Payments are only available in the countries listed above. If a customer asks about another destination, politely explain that support is currently limited to these countries and encourage them to check back for future updates.</span>
@@ -3289,7 +3685,6 @@
 
     <!-- Vanilla JavaScript -->
     <script>
-        // Global function called when the video iframe finishes loading
         function onVideoLoaded() {
             const videoIframe = document.getElementById('videoIframe');
             const videoLoader = document.getElementById('videoLoader');
@@ -3298,18 +3693,61 @@
             }
         }
 
-        // Sidebar Accordion Dropdown Toggle Function
+        function switchPricingTab(tabId) {
+            document.querySelectorAll('.pricing-tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            const selectedTab = document.getElementById(tabId);
+            if (selectedTab) selectedTab.classList.add('active');
+            
+            event.currentTarget.classList.add('active');
+        }
+
+        function calculateCallCost() {
+            const rate = parseFloat(document.getElementById('calc-dest').value);
+            const currency = document.getElementById('calc-curr').value;
+            const amount = parseFloat(document.getElementById('calc-amount').value);
+            const resultBox = document.getElementById('calc-result');
+
+            if (isNaN(amount) || amount <= 0) {
+                resultBox.textContent = 'Please enter a valid positive amount.';
+                return;
+            }
+
+            const minutes = (amount / rate).toFixed(1);
+            
+            let symbol = '€';
+            if (currency === 'CAD' || currency === 'USD') symbol = '$';
+            if (currency === 'GBP') symbol = '£';
+            if (currency === 'SEK' || currency === 'NOK' || currency === 'DKK') symbol = 'kr ';
+            if (currency === 'SAR') symbol = 'SR ';
+
+            resultBox.textContent = `${symbol}${amount} gives approximately ${minutes} minutes.`;
+        }
+
+        // Toggle Quick Calling Tips Card Expand
+        function toggleTipCard(cardElement) {
+            const isOpen = cardElement.classList.contains('open');
+            const content = cardElement.querySelector('.tip-card-content');
+            
+            if (isOpen) {
+                cardElement.classList.remove('open');
+                content.style.maxHeight = null;
+            } else {
+                cardElement.classList.add('open');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        }
+
         function toggleSidebarMenu(menuId) {
             const dropdown = document.getElementById(menuId);
             const isOpened = dropdown.classList.contains('open');
 
-            // Close all dropdowns
             document.querySelectorAll('.sidebar-dropdown').forEach(d => {
                 d.classList.remove('open');
                 d.querySelector('.dropdown-menu').style.maxHeight = null;
             });
 
-            // Open clicked dropdown if it wasn't open
             if (!isOpened) {
                 dropdown.classList.add('open');
                 const menu = dropdown.querySelector('.dropdown-menu');
@@ -3319,7 +3757,8 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. Mobile Sidebar Toggle
+            calculateCallCost();
+
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
 
@@ -3337,7 +3776,6 @@
                 });
             }
 
-            // 2. Accordions
             const accordionHeaders = document.querySelectorAll('.accordion-header');
             accordionHeaders.forEach(header => {
                 header.addEventListener('click', () => {
@@ -3357,7 +3795,6 @@
                 });
             });
 
-            // 3. Dynamic Navigation Active State & Accordion Auto-Expand
             const sections = document.querySelectorAll('section');
             const navItems = document.querySelectorAll('.nav-item');
             const homeNavBtn = document.getElementById('homeNavBtn');
@@ -3384,13 +3821,11 @@
                     }
                 });
 
-                // Reset Active States
                 navItems.forEach(item => item.classList.remove('active'));
                 if (homeNavBtn) homeNavBtn.classList.remove('active');
 
                 if (current === 'home') {
                     if (homeNavBtn) homeNavBtn.classList.add('active');
-                    // Collapse dropdowns when on Home
                     document.querySelectorAll('.sidebar-dropdown').forEach(d => {
                         d.classList.remove('open');
                         d.querySelector('.dropdown-menu').style.maxHeight = null;
@@ -3401,7 +3836,6 @@
                         activeLink.classList.add('active');
                         const parentDropdown = activeLink.closest('.sidebar-dropdown');
                         
-                        // Close other dropdowns and open active one
                         document.querySelectorAll('.sidebar-dropdown').forEach(d => {
                             if (d !== parentDropdown) {
                                 d.classList.remove('open');
@@ -3426,7 +3860,6 @@
                 });
             });
 
-            // 4. Video Modal Handlers
             const videoModal = document.getElementById('videoModal');
             const openEurosVideoBtn = document.getElementById('openEurosVideoBtn');
             const openWorkbookVideoBtn = document.getElementById('openWorkbookVideoBtn');
@@ -3436,12 +3869,9 @@
             const modalVideoTitle = document.getElementById('modalVideoTitle');
             const modalVideoSubtitle = document.getElementById('modalVideoSubtitle');
 
-            // Video URLs
-            // Video URLs
-            const EUROS_VIDEO_URL = "https://www.youtube-nocookie.com/embed/2BWlljymIdE?autoplay=1";;
+            const EUROS_VIDEO_URL = "https://www.youtube-nocookie.com/embed/2BWlljymIdE?autoplay=1&enablejsapi=1";
             const WORKBOOK_VIDEO_URL = "";
 
-            // Handler for "How do I get my 2euros?" video
             if (openEurosVideoBtn) {
                 openEurosVideoBtn.addEventListener('click', () => {
                     if (videoLoader) videoLoader.classList.remove('hidden');
@@ -3453,7 +3883,6 @@
                 });
             }
 
-            // Handler for "Workbook Training Video"
             if (openWorkbookVideoBtn) {
                 openWorkbookVideoBtn.addEventListener('click', () => {
                     if (!WORKBOOK_VIDEO_URL || WORKBOOK_VIDEO_URL.trim() === "") {
@@ -3481,7 +3910,6 @@
                 if (e.target === videoModal) closeVideoModal();
             });
 
-            // 5. Promotional Destinations Search & Modal
             const promoSearchInput = document.getElementById('promoSearchInput');
             const countryCards = document.querySelectorAll('.country-card');
             const promoModal = document.getElementById('promoModal');
@@ -3537,7 +3965,6 @@
                 if (e.target === promoModal) closePromoModal();
             });
 
-            // 6. Bill Payments Interactive Modal Logic
             const billPaymentsModal = document.getElementById('billPaymentsModal');
             const openBillPaymentsBtn = document.getElementById('openBillPaymentsBtn');
             const billPaymentsModalClose = document.getElementById('billPaymentsModalClose');
@@ -3581,7 +4008,6 @@
                 });
             }
 
-            // ESC Key Handler for ALL modals
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     if (videoModal.classList.contains('active')) closeVideoModal();
@@ -3590,12 +4016,11 @@
                 }
             });
 
-            // 7. Global Search Engine
             const globalSearchInput = document.getElementById('globalSearchInput');
             const searchResultsPanel = document.getElementById('searchResultsPanel');
             const searchResultsList = document.getElementById('searchResultsList');
 
-            const searchableElements = document.querySelectorAll('section[id], .script-card, .accordion-item, .country-card, .objection-card, .bill-country-card');
+            const searchableElements = document.querySelectorAll('section[id], .script-card, .accordion-item, .country-card, .objection-card, .bill-country-card, .tip-card');
 
             if (globalSearchInput) {
                 globalSearchInput.addEventListener('input', (e) => {
@@ -3614,7 +4039,7 @@
                             matchesCount++;
                             
                             let title = "Search Result";
-                            const heading = el.querySelector('h1, h2, h3, .script-step-title, .country-name, .bill-country-name, .accordion-header, .objection-text');
+                            const heading = el.querySelector('h1, h2, h3, .script-step-title, .country-name, .bill-country-name, .accordion-header, .objection-text, .tip-title');
                             if (heading) title = heading.innerText.trim();
 
                             const resultItem = document.createElement('div');
@@ -3634,6 +4059,10 @@
 
                                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                                 
+                                if (el.classList.contains('tip-card') && !el.classList.contains('open')) {
+                                    toggleTipCard(el);
+                                }
+
                                 el.style.outline = '2px solid var(--primary)';
                                 setTimeout(() => { el.style.outline = 'none'; }, 2000);
                             });
