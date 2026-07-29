@@ -1,0 +1,3656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outbound Reactivation Pilot – Participant Training Portal</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           1. CSS VARIABLES & BASE STYLES
+           ========================================== */
+        :root {
+            --primary: #00A86B;
+            --primary-hover: #008f5a;
+            --primary-light: #e6f6f0;
+            --secondary: #34D399;
+            --bg-main: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --danger: #EF4444;
+            --danger-light: #FEE2E2;
+            --warning: #F59E0B;
+            --warning-light: #FEF3C7;
+            --sidebar-width: 280px;
+            --header-height: 70px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-size: 16px;
+        }
+
+        body {
+            line-height: 1.8;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Reading Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* ==========================================
+           2. LAYOUT & SIDEBAR NAVIGATION
+           ========================================== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand-logo-img {
+            height: 42px;
+            width: auto;
+            max-width: 160px;
+            object-fit: contain;
+        }
+
+        .logo-icon-fallback {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 168, 107, 0.25);
+        }
+
+        .sidebar-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .sidebar-search {
+            padding: 16px 20px 8px 20px;
+            position: relative;
+        }
+
+        .global-search-input {
+            width: 100%;
+            padding: 10px 14px 10px 38px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-family: inherit;
+            background: var(--bg-main);
+            color: var(--text-main);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .global-search-input:focus {
+            border-color: var(--primary);
+            background: var(--card-bg);
+            box-shadow: 0 0 0 3px rgba(0, 168, 107, 0.15);
+        }
+
+        .sidebar-search i {
+            position: absolute;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .sidebar-nav {
+            padding: 12px 0 20px 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        /* Fixed Home Nav Item */
+        .fixed-home-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+            margin-bottom: 8px;
+        }
+
+        .fixed-home-item:hover, .fixed-home-item.active {
+            color: var(--primary);
+            background: var(--primary-light);
+            border-left-color: var(--primary);
+        }
+
+        /* Accordion Dropdown Styles */
+        .sidebar-dropdown {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .dropdown-toggle {
+            width: 100%;
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            text-align: left;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .dropdown-toggle:hover {
+            color: var(--primary);
+            background: var(--bg-main);
+        }
+
+        .dropdown-toggle i.chevron {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .sidebar-dropdown.open .dropdown-toggle i.chevron {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+
+        .dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+            background: var(--bg-main);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px 10px 36px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13.5px;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+            background: var(--primary-light);
+            border-left-color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-item i {
+            width: 18px;
+            text-align: center;
+        }
+
+        /* FULL WIDTH MAIN WRAPPER FIX */
+        .main-wrapper {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 40px 60px;
+            width: calc(100% - var(--sidebar-width));
+            max-width: 100%;
+            transition: var(--transition);
+        }
+
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 20px;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 90;
+        }
+
+        .mobile-toggle {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* Search Results Overlay */
+        .search-results-panel {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-results-panel.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: var(--radius-sm);
+        }
+
+        .search-result-item:hover {
+            background: var(--primary-light);
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-title {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 15px;
+        }
+
+        .search-snippet {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           3. HERO SECTIONS & DASHBOARD
+           ========================================== */
+        .hero-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            border: 1px solid rgba(0, 168, 107, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .meta-item {
+            font-size: 14px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 900px;
+            line-height: 1.7;
+        }
+
+        .hero-illustration {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            opacity: 0.08;
+            font-size: 280px;
+            color: var(--primary);
+            pointer-events: none;
+        }
+
+        /* Roadmap Steps - Responsive Fluid */
+        .roadmap-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 48px;
+            width: 100%;
+        }
+
+        .roadmap-step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .roadmap-step-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .roadmap-num {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 12px auto;
+            font-size: 14px;
+        }
+
+        .roadmap-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* Main Resource Cards Grid - Responsive Fluid */
+        .main-resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+            width: 100%;
+        }
+
+        .resource-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .resource-card-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .resource-card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .resource-card-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .resource-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .resource-card-time {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 168, 107, 0.2);
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 168, 107, 0.3);
+        }
+
+        /* ==========================================
+           4. TYPOGRAPHY & SECTIONS
+           ========================================== */
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 40px;
+            width: 100%;
+        }
+
+        h2.section-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2.section-title i {
+            color: var(--primary);
+            font-size: 26px;
+        }
+
+        p.section-desc {
+            font-size: 17px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* ==========================================
+           5. REUSABLE COMPONENTS & FLUID GRIDS
+           ========================================== */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .grid-two {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 24px;
+            width: 100%;
+        }
+
+        .grid-three {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* Objectives */
+        .objective-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            position: relative;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .objective-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary);
+        }
+
+        .obj-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .obj-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        /* Checklists */
+        .checklist-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            width: 100%;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .checklist-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .checklist-item:hover {
+            background: var(--primary-light);
+        }
+
+        .checklist-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: var(--transition);
+        }
+
+        .checklist-item.checked .checklist-icon {
+            background: var(--primary-hover);
+            transform: scale(1.1);
+        }
+
+        .checklist-text {
+            font-size: 16px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .checklist-footer {
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: #f0fdf4;
+            border: 1px dashed var(--primary);
+            border-radius: var(--radius-sm);
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 5px;
+            bottom: 5px;
+            width: 3px;
+            background: var(--border-color);
+        }
+
+        .timeline-step {
+            position: relative;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+
+        .timeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-node {
+            position: absolute;
+            left: -30px;
+            top: 2px;
+            width: 25px;
+            height: 25px;
+            background: var(--card-bg);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .timeline-step:hover .timeline-node {
+            background: var(--primary);
+            color: white;
+            scale: 1.2;
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            box-shadow: var(--shadow-sm);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .timeline-step.highlight .timeline-content {
+            background: #f0fdf4;
+            border-color: var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Benefits & Pricing */
+        .pricing-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-header {
+            margin-bottom: 20px;
+        }
+
+        .pricing-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .pricing-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+
+        .pricing-features li i {
+            color: var(--primary);
+        }
+
+        .pricing-note {
+            background: var(--bg-main);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-left: 3px solid var(--warning);
+        }
+
+        /* Payroll Card */
+        .payroll-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+        }
+
+        .payroll-card h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payroll-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .payroll-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 20px;
+        }
+
+        .payroll-box .date {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 6px;
+        }
+
+        .payroll-box p {
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        .example-callout {
+            margin-top: 24px;
+            background: rgba(52, 211, 153, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 16px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 14px;
+            color: #e2e8f0;
+        }
+
+        /* Video Card component in Onboarding Guide */
+        .video-card-inline {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            margin-top: 24px;
+            width: 100%;
+        }
+
+        .video-card-inline .video-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .video-card-inline .video-icon {
+            width: 60px;
+            height: 60px;
+            background: #e6f6f0;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        /* Features & Workbook */
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin: 0 auto 16px auto;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .workbook-cta {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .btn-workbook {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #107C41;
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(16, 124, 65, 0.2);
+        }
+
+        .btn-workbook:hover {
+            background: #0B5C30;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 124, 65, 0.3);
+        }
+
+        /* Rules Split */
+        .rules-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            width: 100%;
+        }
+
+        .rule-card {
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .rule-card.dos {
+            background: #f0fdf4;
+            border: 1px solid rgba(0, 168, 107, 0.2);
+        }
+
+        .rule-card.donts {
+            background: #fef2f2;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .rule-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .rule-card.dos .rule-header { color: var(--primary); }
+        .rule-card.donts .rule-header { color: var(--danger); }
+
+        .rule-list { list-style: none; }
+
+        .rule-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+
+        .rule-card.dos li i { color: var(--primary); margin-top: 4px; }
+        .rule-card.donts li i { color: var(--danger); margin-top: 4px; }
+
+        /* Quick Access Cards Grid - Responsive Fluid */
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+
+        .quick-access-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .quick-access-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .quick-access-card i {
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        .quick-access-card span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Script Flow */
+        .script-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 100%;
+        }
+
+        .script-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .script-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .script-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .script-step-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .step-badge {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .speech-bubble {
+            background: #F0FDF4;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 17px;
+            color: #064E3B;
+            font-weight: 500;
+            line-height: 1.7;
+            margin-top: 12px;
+        }
+
+        .agent-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .guidance-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .guidance-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary);
+        }
+
+        .guidance-situation {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guidance-response {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            background: var(--bg-main);
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--secondary);
+        }
+
+        /* Feature Cards Full */
+        .feature-card-full {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .feature-card-full:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Clickable Card Hover */
+        .clickable-feature {
+            transition: var(--transition);
+        }
+
+        .clickable-feature:hover {
+            border-color: var(--primary) !important;
+            background: #F0FDF4;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon-lg {
+            width: 54px;
+            height: 54px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .feature-details h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .feature-details p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Currency Pills */
+        .currency-tag {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        /* Bill Countries Grid System - Responsive Fluid */
+        .bill-countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            width: 100%;
+        }
+
+        .bill-country-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bill-country-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            background: #F0FDF4;
+        }
+
+        .bill-country-flag {
+            font-size: 36px;
+            line-height: 1;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .bill-country-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .currency-badge {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--primary-light);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* Search & Promotional Destinations - Responsive Fluid */
+        .promo-search-wrapper {
+            position: relative;
+            margin-bottom: 24px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .promo-search-input {
+            width: 100%;
+            padding: 14px 18px 14px 46px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-family: inherit;
+            background: var(--card-bg);
+            color: var(--text-main);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .promo-search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 168, 107, 0.15);
+        }
+
+        .promo-search-wrapper .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .country-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+
+        .country-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            background: #F0FDF4;
+        }
+
+        .country-flag {
+            font-size: 44px;
+            margin-bottom: 12px;
+            display: block;
+            line-height: 1;
+        }
+
+        .country-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .promo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .callout-info {
+            margin-top: 24px;
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            color: #1E40AF;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        /* Questions */
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .question-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            background: #FAFDFB;
+        }
+
+        .question-text {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .question-text i {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--bg-main);
+            padding: 4px 10px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        /* FAQs */
+        .accordion-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 20px 24px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .accordion-header i {
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .accordion-item.active .accordion-header i {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+            background: var(--card-bg);
+        }
+
+        .accordion-body {
+            padding: 0 24px 20px 24px;
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Objections */
+        .objection-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .objection-card:hover {
+            border-color: var(--warning);
+            box-shadow: var(--shadow-md);
+        }
+
+        .objection-left {
+            background: #FFFBEB;
+            padding: 20px 24px;
+            border-right: 1px solid #FDE68A;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .objection-right {
+            padding: 20px 24px;
+            background: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .col-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .objection-left .col-label { color: #D97706; }
+        .objection-right .col-label { color: var(--primary); }
+
+        .objection-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .response-text {
+            font-size: 15px;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Closing */
+        .closing-card {
+            background: linear-gradient(135deg, #00A86B 0%, #008f5a 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .closing-icon {
+            font-size: 50px;
+            color: var(--secondary);
+            flex-shrink: 0;
+        }
+
+        .closing-body h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .closing-text {
+            font-size: 18px;
+            line-height: 1.7;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Escalation */
+        .escalation-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .escalation-card {
+            background: #FEF2F2;
+            border: 1px solid #FCA5A5;
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .escalation-card:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .escalation-icon {
+            width: 40px;
+            height: 40px;
+            background: #EF4444;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .escalation-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #991B1B;
+        }
+
+        /* Tips */
+        .tip-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tip-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tip-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin: 0 auto 16px auto;
+        }
+
+        .tip-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #008f5a 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+        }
+
+        .cta-card h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-card p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 32px auto;
+            opacity: 0.9;
+        }
+
+        .btn-cta {
+            background: white;
+            color: var(--primary);
+            padding: 16px 36px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            background: #f8fafc;
+        }
+
+        /* Modals & Loading State */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            max-width: 800px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transform: scale(0.95) translateY(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-backdrop.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: var(--danger-light);
+            color: var(--danger);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            background: #0f172a;
+            margin-top: 16px;
+        }
+
+        .video-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            gap: 12px;
+            z-index: 1;
+            background: #0f172a;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .video-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .spinner {
+            font-size: 28px;
+            color: var(--secondary);
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            z-index: 2;
+        }
+
+        /* Promo Modal Information Cards */
+        .promo-modal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .modal-detail-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .modal-card-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .modal-card-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-card-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .modal-reminder-card {
+            background: #F0FDF4;
+            border: 1px solid rgba(0, 168, 107, 0.25);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+        }
+
+        .reminder-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .modal-reminder-card p {
+            font-size: 14px;
+            color: #064E3B;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Floating Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            background: var(--primary-hover);
+        }
+
+        /* ==========================================
+           6. RESPONSIVE DESIGN
+           ========================================== */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-wrapper {
+                margin-left: 0;
+                width: 100%;
+                padding: 100px 20px 40px 20px;
+            }
+
+            .mobile-header {
+                display: flex;
+            }
+
+            .rules-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .objection-card {
+                grid-template-columns: 1fr;
+            }
+
+            .objection-left {
+                border-right: none;
+                border-bottom: 1px solid #FDE68A;
+            }
+
+            .closing-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .grid-two {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-card {
+                padding: 24px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 15px;
+            }
+
+            h2.section-title {
+                font-size: 24px;
+            }
+
+            .question-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .promo-modal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="froggytalk logo.png" 
+                 alt="FroggyTalk Logo" 
+                 class="brand-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="logo-icon-fallback" style="display: none;">F</div>
+        </div>
+        <button class="mobile-toggle" id="menuToggle" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+                <img src="froggytalk logo.png" 
+                     alt="FroggyTalk Logo" 
+                     class="brand-logo-img"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="logo-icon-fallback" style="display: none;">F</div>
+                <div class="sidebar-subtitle" style="margin-top: 4px;">Participant Training Portal</div>
+            </div>
+        </div>
+
+        <!-- Global Search Input -->
+        <div class="sidebar-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="globalSearchInput" class="global-search-input" placeholder="Search portal..." aria-label="Search training portal">
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- Permanently Fixed Home Item -->
+            <a href="#home" class="fixed-home-item active" id="homeNavBtn">
+                <i class="fa-solid fa-house"></i> Home Dashboard
+            </a>
+            
+            <!-- Staff Onboarding Guide Dropdown Accordion -->
+            <div class="sidebar-dropdown" id="staffDropdown">
+                <button class="dropdown-toggle" onclick="toggleSidebarMenu('staffDropdown')">
+                    <span><i class="fa-solid fa-rocket" style="margin-right: 8px; color: var(--primary);"></i> Staff Guide</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#welcome" class="nav-item"><i class="fa-solid fa-hand-wave"></i> Welcome</a>
+                    <a href="#objectives" class="nav-item"><i class="fa-solid fa-bullseye"></i> Objectives</a>
+                    <a href="#reactivation" class="nav-item"><i class="fa-solid fa-circle-check"></i> Reactivation</a>
+                    <a href="#onboarding-video-section" class="nav-item"><i class="fa-solid fa-circle-play"></i> How do I get my 2euros?</a>
+                    <a href="#journey" class="nav-item"><i class="fa-solid fa-route"></i> Customer Journey</a>
+                    <a href="#benefits" class="nav-item"><i class="fa-solid fa-gift"></i> Benefits</a>
+                    <a href="#payroll" class="nav-item"><i class="fa-solid fa-credit-card"></i> Payroll Timeline</a>
+                    <a href="#workbook" class="nav-item"><i class="fa-solid fa-book-open"></i> Workbook</a>
+                    <a href="#rules" class="nav-item"><i class="fa-solid fa-shield-halved"></i> Do's & Don'ts</a>
+                    <a href="#faqs" class="nav-item"><i class="fa-solid fa-circle-question"></i> Participant FAQs</a>
+                </div>
+            </div>
+
+            <!-- Outbound Calling Guide Dropdown Accordion -->
+            <div class="sidebar-dropdown" id="callingDropdown">
+                <button class="dropdown-toggle" onclick="toggleSidebarMenu('callingDropdown')">
+                    <span><i class="fa-solid fa-phone" style="margin-right: 8px; color: var(--primary);"></i> Calling Guide</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#calling-guide-hero" class="nav-item"><i class="fa-solid fa-compass"></i> Guide Overview</a>
+                    <a href="#pre-call" class="nav-item"><i class="fa-solid fa-clipboard-check"></i> Pre-call Checklist</a>
+                    <a href="#script" class="nav-item"><i class="fa-solid fa-comments"></i> Call Script & Flow</a>
+                    <a href="#active-listening" class="nav-item"><i class="fa-solid fa-ear-listen"></i> Active Listening</a>
+                    <a href="#improvements" class="nav-item"><i class="fa-solid fa-sparkles"></i> Product Highlights</a>
+                    <a href="#promotions" class="nav-item"><i class="fa-solid fa-globe"></i> Promotions</a>
+                    <a href="#discovery" class="nav-item"><i class="fa-solid fa-circle-question"></i> Discovery Questions</a>
+                    <a href="#customer-faqs" class="nav-item"><i class="fa-solid fa-headset"></i> Customer FAQs</a>
+                    <a href="#objections" class="nav-item"><i class="fa-solid fa-shield"></i> Objection Handling</a>
+                    <a href="#closing" class="nav-item"><i class="fa-solid fa-handshake"></i> Closing the Call</a>
+                    <a href="#escalation" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> Escalation Guide</a>
+                    <a href="#post-call" class="nav-item"><i class="fa-solid fa-list-check"></i> Post-call Checklist</a>
+                    <a href="#tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> Calling Tips</a>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+
+        <!-- Global Search Results Panel -->
+        <div class="search-results-panel" id="searchResultsPanel">
+            <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--text-main);"><i class="fa-solid fa-magnifying-glass"></i> Search Results</h3>
+            <div id="searchResultsList"></div>
+        </div>
+
+        <!-- ==========================================
+             1. HOME DASHBOARD
+             ========================================== -->
+        <section id="home">
+            <div class="hero-card">
+                <i class="fa-solid fa-graduation-cap hero-illustration"></i>
+                <div class="hero-meta">
+                    <span class="badge"><i class="fa-solid fa-bolt"></i> Outbound Reactivation Pilot</span>
+                    <span class="meta-item"><i class="fa-regular fa-compass"></i> Participant Training Portal</span>
+                    <span class="meta-item"><i class="fa-regular fa-calendar"></i> August 2026</span>
+                </div>
+                <h1 class="hero-title">Welcome to the Training Portal</h1>
+                <p class="hero-subtitle">
+                    Welcome to the Outbound Reactivation Pilot. This portal contains everything you need before and during customer calls. If you're new, start with the Staff Onboarding Guide, then watch the workbook training video before opening the Outbound Calling Guide.
+                </p>
+            </div>
+
+            <!-- Visual Training Roadmap -->
+            <h2 class="section-title"><i class="fa-solid fa-route"></i> Training Journey</h2>
+            <div class="roadmap-container">
+                <div class="roadmap-step-card">
+                    <div class="roadmap-num">1</div>
+                    <div class="roadmap-title">🚀 Read the Staff Onboarding Guide</div>
+                </div>
+                <div class="roadmap-step-card">
+                    <div class="roadmap-num">2</div>
+                    <div class="roadmap-title">🎥 Watch the Workbook Training Video</div>
+                </div>
+                <div class="roadmap-step-card">
+                    <div class="roadmap-num">3</div>
+                    <div class="roadmap-title">📞 Open the Outbound Calling Guide</div>
+                </div>
+                <div class="roadmap-step-card">
+                    <div class="roadmap-num">4</div>
+                    <div class="roadmap-title">☎ Begin Calling Customers</div>
+                </div>
+            </div>
+
+            <!-- Main Primary Cards -->
+            <h2 class="section-title"><i class="fa-solid fa-folder-open"></i> Main Training Resources</h2>
+            <div class="main-resources-grid">
+                
+                <!-- Card 1 -->
+                <div class="resource-card">
+                    <div>
+                        <div class="resource-card-icon"><i class="fa-solid fa-rocket"></i></div>
+                        <h3 class="resource-card-title">Staff Onboarding Guide</h3>
+                        <p class="resource-card-desc">
+                            Learn how the programme works, participant expectations, verified reactivations, payroll, workbook usage, programme rules and FAQs.
+                        </p>
+                    </div>
+                    <div class="resource-card-footer">
+                        <span class="resource-card-time"><i class="fa-regular fa-clock"></i> 8 min read</span>
+                        <a href="#welcome" class="btn-primary">Open Guide <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="resource-card">
+                    <div>
+                        <div class="resource-card-icon"><i class="fa-solid fa-circle-play"></i></div>
+                        <h3 class="resource-card-title">Workbook Training Video</h3>
+                        <p class="resource-card-desc">
+                            Watch the recorded workbook walk-through session before making customer calls to get familiar with procedures and logging.
+                        </p>
+                    </div>
+                    <div class="resource-card-footer">
+                        <span class="resource-card-time"><i class="fa-regular fa-circle-play"></i> Training Session</span>
+                        <button class="btn-primary" id="openWorkbookVideoBtn"><i class="fa-solid fa-play"></i> Watch Video</button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="resource-card">
+                    <div>
+                        <div class="resource-card-icon"><i class="fa-solid fa-headset"></i></div>
+                        <h3 class="resource-card-title">Outbound Calling Guide</h3>
+                        <p class="resource-card-desc">
+                            Your live reference while speaking with customers, including call scripts, FAQs, objection handling, promotions and escalation guidance.
+                        </p>
+                    </div>
+                    <div class="resource-card-footer">
+                        <span class="resource-card-time"><i class="fa-regular fa-clock"></i> 5 min read</span>
+                        <a href="#calling-guide-hero" class="btn-primary">Open Guide <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 60px 0;">
+
+        <!-- ==========================================
+             2. STAFF ONBOARDING GUIDE SECTION
+             ========================================== -->
+        <div id="staff-guide-wrapper">
+            
+            <!-- Welcome -->
+            <section id="welcome">
+                <div class="hero-card">
+                    <i class="fa-solid fa-headset hero-illustration"></i>
+                    <div class="hero-meta">
+                        <span class="badge"><i class="fa-solid fa-bolt"></i> Outbound Reactivation Pilot</span>
+                        <span class="meta-item"><i class="fa-regular fa-clock"></i> 8 min read</span>
+                        <span class="meta-item"><i class="fa-regular fa-calendar"></i> Last Updated: August 2026</span>
+                    </div>
+                    <h1 class="hero-title">🚀 Staff Onboarding Guide: Outbound Reactivation Pilot</h1>
+                    <p class="hero-subtitle">
+                        Welcome to the Outbound Reactivation Pilot! Thank you for volunteering to participate in this initiative. Your calls will help us reconnect with inactive customers, understand why they stopped using FroggyTalk, and encourage them to return to the app.
+                    </p>
+                    <p style="margin-top: 16px; font-size: 15px; color: var(--text-muted);">
+                        This guide explains how the programme works, what is expected of you, how incentives are paid, and where to find help during the pilot.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Objectives -->
+            <section id="objectives">
+                <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 🎯 Programme Overview & Purpose</h2>
+                <p class="section-desc">
+                    The Outbound Reactivation Pilot is a retention initiative designed to evaluate whether personalized outbound calls can successfully bring inactive customers back to FroggyTalk.
+                </p>
+                <h3 style="font-size: 18px; margin-bottom: 16px; color: var(--text-muted);">Primary Objectives:</h3>
+                <div class="grid-cards">
+                    <div class="objective-card">
+                        <div class="obj-number">1</div>
+                        <div class="obj-text">Re-engage inactive customers and encourage them to return to FroggyTalk.</div>
+                    </div>
+                    <div class="objective-card">
+                        <div class="obj-number">2</div>
+                        <div class="obj-text">Encourage customers to update to the latest version of the app.</div>
+                    </div>
+                    <div class="objective-card">
+                        <div class="obj-number">3</div>
+                        <div class="obj-text">Increase successful reactivations and call credit purchases.</div>
+                    </div>
+                    <div class="objective-card">
+                        <div class="obj-number">4</div>
+                        <div class="obj-text">Gather insights on why customers stopped using FroggyTalk.</div>
+                    </div>
+                    <div class="objective-card">
+                        <div class="obj-number">5</div>
+                        <div class="obj-text">Evaluate whether outbound calling should become a long-term retention strategy.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reactivation -->
+            <section id="reactivation">
+                <h2 class="section-title"><i class="fa-solid fa-circle-check"></i> ✅ What Counts as a Verified Reactivation?</h2>
+                <p class="section-desc">A customer is considered successfully reactivated only when all three of the following actions are completed:</p>
+                <div class="checklist-card">
+                    <div class="checklist-item">
+                        <div class="checklist-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="checklist-text">Updates to the latest version of the FroggyTalk app (They need to update to get the latest app with the best functionality).</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="checklist-text">Makes a successful call using their allocated 2 free calling minutes.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="checklist-text">Purchases call credit.</div>
+                    </div>
+                    <div class="checklist-footer">
+                        <i class="fa-solid fa-robot"></i>
+                        <span>🤖 Once these actions are completed, the reactivation is automatically verified.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Onboarding Video Section: How do I get my 2euros? -->
+            <section id="onboarding-video-section">
+                <h2 class="section-title"><i class="fa-solid fa-circle-play"></i> 🎥 How do I get my 2euros?</h2>
+                <p class="section-desc">Watch this quick 1-minute video guide explaining how your €2 reactivation incentives are earned and verified.</p>
+                <div class="video-card-inline">
+                    <div class="video-info">
+                        <div class="video-icon"><i class="fa-solid fa-play"></i></div>
+                        <div>
+                            <h3 style="font-size: 18px; color: var(--text-main); font-weight: 700;">How do I get my 2euros?</h3>
+                            <p style="font-size: 14px; color: var(--text-muted);"><i class="fa-regular fa-clock"></i> 1 min video walkthrough</p>
+                        </div>
+                    </div>
+                    <button class="btn-primary" id="openEurosVideoBtn"><i class="fa-solid fa-play"></i> Watch Video</button>
+                </div>
+            </section>
+
+            <!-- Customer Journey -->
+            <section id="journey">
+                <h2 class="section-title"><i class="fa-solid fa-route"></i> 🗺️ Customer Journey</h2>
+                <p class="section-desc">Follow this sequential process for every assigned customer contact:</p>
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="timeline-node">1</div>
+                        <div class="timeline-content">Call the assigned customer.</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-node">2</div>
+                        <div class="timeline-content">Introduce yourself on behalf of FroggyTalk.</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-node">3</div>
+                        <div class="timeline-content">Explain the purpose of your call.</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-node">4</div>
+                        <div class="timeline-content">Highlight the incentive: Let the customer know that 2 free calling minutes have already been allocated to their account and will become visible after they update the app.</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-node">5</div>
+                        <div class="timeline-content">Share relevant product improvements based on the customer's needs and interests.</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-node">6</div>
+                        <div class="timeline-content">Encourage the customer to update to the latest version of the FroggyTalk app.</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-node">7</div>
+                        <div class="timeline-content">Customer updates the app.</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-node">8</div>
+                        <div class="timeline-content">The allocated 2 free calling minutes become visible.</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-node">9</div>
+                        <div class="timeline-content">Customer makes a successful call using the free minutes.</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-node">10</div>
+                        <div class="timeline-content">Customer purchases call credit.</div>
+                    </div>
+                    <div class="timeline-step highlight">
+                        <div class="timeline-node"><i class="fa-solid fa-star"></i></div>
+                        <div class="timeline-content">The reactivation is automatically verified, and you become eligible for the €2 reactivation incentive.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Participant Benefits -->
+            <section id="benefits">
+                <h2 class="section-title"><i class="fa-solid fa-gift"></i> 💶 Participant Benefits</h2>
+                <div class="grid-two">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <div class="pricing-title">Working Call Credit</div>
+                            <div class="pricing-amount">€10</div>
+                            <p style="color: var(--text-muted); font-size: 14px;">Applied before beginning the pilot</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fa-solid fa-check-circle"></i> Used to make outbound calls</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Used to test customer experience where necessary</li>
+                        </ul>
+                        <div class="pricing-note">
+                            <strong>Important Note:</strong> This is working credit and is NOT an incentive or reward.
+                        </div>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <div class="pricing-title">Reactivation Incentive</div>
+                            <div class="pricing-amount">€2</div>
+                            <p style="color: var(--text-muted); font-size: 14px;">Per verified customer</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fa-solid fa-check-circle"></i> Earned for every verified reactivated customer</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Automatically tracked via system</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Paid directly into monthly salary</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Payroll Timeline -->
+            <section id="payroll">
+                <h2 class="section-title"><i class="fa-solid fa-credit-card"></i> 💳 Payroll & Payment Timeline</h2>
+                <div class="payroll-card">
+                    <h3><i class="fa-solid fa-calendar-check"></i> All reactivation incentives are paid through your monthly salary.</h3>
+                    <div class="payroll-timeline">
+                        <div class="payroll-box">
+                            <div class="date">On or Before 19th</div>
+                            <p>Verified reactivations completed on or before the 19th of each month are included in that month's salary.</p>
+                        </div>
+                        <div class="payroll-box">
+                            <div class="date">After 19th</div>
+                            <p>Verified reactivations completed after the 19th are paid in the following month's salary.</p>
+                        </div>
+                    </div>
+                    <div class="example-callout">
+                        <i class="fa-solid fa-circle-info"></i> <strong>Example:</strong> Any verified reactivations completed after 19 August will be paid in your September salary.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workbook Walkthrough -->
+            <section id="workbook">
+                <h2 class="section-title"><i class="fa-solid fa-book-open"></i> 📊 Workbook Walkthrough</h2>
+                <p class="section-desc">Participants should learn to navigate and manage the following tasks within the workbook:</p>
+                <div class="grid-three">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                        <div class="feature-title">Access assigned customers</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                        <div class="feature-title">Navigate the workbook</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-phone-slash"></i></div>
+                        <div class="feature-title">Log call outcomes</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-regular fa-clock"></i></div>
+                        <div class="feature-title">Record call duration</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-comment-dots"></i></div>
+                        <div class="feature-title">Capture customer feedback</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                        <div class="feature-title">Record follow-up actions</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="feature-title">Track verified reactivations</div>
+                    </div>
+                </div>
+                
+                <div class="workbook-cta">
+                    <a href="https://docs.google.com/spreadsheets/d/1Ei2Ra1YLs52J_QZ32hyGl-Y6q4KtJ1apqykGZqHYkII/edit?usp=sharing" target="_blank" class="btn-workbook">
+                        <i class="fa-solid fa-file-excel"></i> Open Participant Workbook Spreadsheet
+                    </a>
+                </div>
+            </section>
+
+            <!-- Programme Rules -->
+            <section id="rules">
+                <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> 📋 Programme Rules</h2>
+                <div class="rules-wrapper">
+                    <!-- Do's -->
+                    <div class="rule-card dos">
+                        <div class="rule-header">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Do's</span>
+                        </div>
+                        <ul class="rule-list">
+                            <li><i class="fa-solid fa-check"></i> Contact assigned customers only.</li>
+                            <li><i class="fa-solid fa-check"></i> Call between 10:00 AM and 5:00 PM (customer local time).</li>
+                            <li><i class="fa-solid fa-check"></i> Check it is a convenient time.</li>
+                            <li><i class="fa-solid fa-check"></i> Keep conversations natural.</li>
+                            <li><i class="fa-solid fa-check"></i> Update workbook immediately.</li>
+                            <li><i class="fa-solid fa-check"></i> Maintain confidentiality.</li>
+                            <li><i class="fa-solid fa-check"></i> Escalate technical bugs.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Don'ts -->
+                    <div class="rule-card donts">
+                        <div class="rule-header">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <span>Don'ts</span>
+                        </div>
+                        <ul class="rule-list">
+                            <li><i class="fa-solid fa-xmark"></i> Do not contact customers outside your list.</li>
+                            <li><i class="fa-solid fa-xmark"></i> Do not modify assignments.</li>
+                            <li><i class="fa-solid fa-xmark"></i> Do not promise unapproved offers.</li>
+                            <li><i class="fa-solid fa-xmark"></i> Do not share customer information.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Participant FAQs -->
+            <section id="faqs">
+                <h2 class="section-title"><i class="fa-solid fa-circle-question"></i> ❓ Participant FAQs</h2>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Q: When will I receive my €10 call credit?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            A: Your €10 FroggyTalk call credit will be applied before you begin making outbound calls. This is working credit to make calls to your assigned list, not a reward.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Q: When will I receive my reactivation incentive?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            A: Verified reactivations completed on or before the 19th of each month are included in that month's salary. Anything after the 19th is paid in the following month's salary.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Q: What counts as a verified reactivation?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            A: A customer who purchases call credit.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Q: Can I call customers who are not on my assigned list?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            A: No. Only contact customers explicitly allocated to you.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Q: What should I do if a customer has a technical issue?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            A: Escalate the issue directly to Customer Support. Do not troubleshoot outside the scope of the pilot.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Q: Can I promise customers additional promotions or rewards?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            A: No. Only communicate officially approved promotions.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Q: What if I finish my assigned customer list?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            A: Notify Itunu once you've completed your assigned batch. Additional customers may be allocated if available.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 60px 0;">
+
+        <!-- ==========================================
+             3. OUTBOUND CALLING GUIDE SECTION
+             ========================================== -->
+        <div id="calling-guide-wrapper">
+            
+            <section id="calling-guide-hero">
+                <div class="hero-card">
+                    <i class="fa-solid fa-headset hero-illustration"></i>
+                    <div class="hero-meta">
+                        <span class="badge"><i class="fa-solid fa-book-open"></i> Reference Guide</span>
+                        <span class="meta-item"><i class="fa-regular fa-clock"></i> 5 min read</span>
+                        <span class="meta-item"><i class="fa-regular fa-calendar"></i> Last Updated: August 2026</span>
+                    </div>
+                    <h1 class="hero-title">📞 Outbound Calling Guide & Reference</h1>
+                    <p class="hero-subtitle">
+                        Your live reference guide while speaking with customers.
+                    </p>
+                    <p style="margin-top: 16px; font-size: 15px; color: var(--text-muted);">
+                        Keep this document open while making customer calls! It contains your pre-call checklist, live call script, product highlights, discovery questions, FAQs, objection handling, escalation guidelines, and post-call logging steps.
+                    </p>
+                    <div style="margin-top: 24px; display: inline-flex; align-items: center; gap: 12px; background: #FEF3C7; border: 1px solid rgba(245, 158, 11, 0.3); color: #92400E; padding: 12px 20px; border-radius: var(--radius-md); font-weight: 600; font-size: 14px;">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span>Quick Tip: Keep this guide open during every call.</span>
+                    </div>
+                </div>
+
+                <!-- Quick Access Grid -->
+                <div class="quick-access-grid">
+                    <a href="#pre-call" class="quick-access-card"><i class="fa-solid fa-clipboard-check"></i><span>Pre-call Checklist</span></a>
+                    <a href="#script" class="quick-access-card"><i class="fa-solid fa-phone"></i><span>Call Script</span></a>
+                    <a href="#improvements" class="quick-access-card"><i class="fa-solid fa-sparkles"></i><span>Product Improvements</span></a>
+                    <a href="#promotions" class="quick-access-card"><i class="fa-solid fa-globe"></i><span>Promotions</span></a>
+                    <a href="#discovery" class="quick-access-card"><i class="fa-solid fa-comments"></i><span>Discovery Questions</span></a>
+                    <a href="#customer-faqs" class="quick-access-card"><i class="fa-solid fa-circle-question"></i><span>Customer FAQs</span></a>
+                    <a href="#objections" class="quick-access-card"><i class="fa-solid fa-shield-halved"></i><span>Objection Handling</span></a>
+                    <a href="#closing" class="quick-access-card"><i class="fa-solid fa-handshake"></i><span>Closing</span></a>
+                    <a href="#escalation" class="quick-access-card"><i class="fa-solid fa-triangle-exclamation"></i><span>Escalation Guide</span></a>
+                    <a href="#post-call" class="quick-access-card"><i class="fa-solid fa-list-check"></i><span>Post-call Checklist</span></a>
+                    <a href="#tips" class="quick-access-card"><i class="fa-solid fa-lightbulb"></i><span>Calling Tips</span></a>
+                </div>
+            </section>
+
+            <!-- Pre-Call Checklist -->
+            <section id="pre-call">
+                <h2 class="section-title"><i class="fa-solid fa-clipboard-check"></i> 📋 Pre-Call Checklist</h2>
+                <p class="section-desc">Before dialing, make sure:</p>
+                <div class="checklist-card">
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')">
+                        <div class="checklist-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="checklist-text">The customer appears on your assigned list.</div>
+                    </div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')">
+                        <div class="checklist-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="checklist-text">You have verified the phone number.</div>
+                    </div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')">
+                        <div class="checklist-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="checklist-text">You have sufficient FroggyTalk call credit to complete your calls.</div>
+                    </div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')">
+                        <div class="checklist-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="checklist-text">Your workbook is open and ready.</div>
+                    </div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')">
+                        <div class="checklist-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="checklist-text">Local customer time is strictly between 10:00 AM and 5:00 PM.</div>
+                    </div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')">
+                        <div class="checklist-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="checklist-text">You know the customer's preferred language (where available).</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call Script & Flow -->
+            <section id="script">
+                <h2 class="section-title"><i class="fa-solid fa-phone"></i> ☎️ Call Script & Flow</h2>
+                <p class="section-desc">Follow this structured conversation flow during live calls:</p>
+                
+                <div class="script-flow">
+                    <div class="script-card">
+                        <div class="script-header">
+                            <div class="script-step-title"><div class="step-badge">1</div><span>Opening & Convenience Check</span></div>
+                            <i class="fa-solid fa-user-check" style="color: var(--primary); font-size: 20px;"></i>
+                        </div>
+                        <div class="agent-label"><i class="fa-solid fa-headset"></i> Agent Says</div>
+                        <div class="speech-bubble">
+                            "Hello, my name is [Your Name] and I'm calling from FroggyTalk. Is now a convenient time to speak for about 2 to 3 minutes?"
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <div class="script-header">
+                            <div class="script-step-title"><div class="step-badge">2</div><span>Pitch the Free Incentive</span></div>
+                            <i class="fa-solid fa-gift" style="color: var(--primary); font-size: 20px;"></i>
+                        </div>
+                        <div class="agent-label"><i class="fa-solid fa-headset"></i> Agent Says</div>
+                        <div class="speech-bubble">
+                            "I'm calling because we noticed you haven't used FroggyTalk in a while, and we'd love to welcome you back! We've already added 2 free calling minutes to your account. Once you update to the latest version of the app, those minutes will automatically appear for you to use."
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <div class="script-header">
+                            <div class="script-step-title"><div class="step-badge">3</div><span>Share Improvements & Features</span></div>
+                            <i class="fa-solid fa-sparkles" style="color: var(--primary); font-size: 20px;"></i>
+                        </div>
+                        <div class="agent-label"><i class="fa-solid fa-headset"></i> Agent Says</div>
+                        <div class="speech-bubble">
+                            "Since you last used FroggyTalk, we've introduced several improvements—including better call quality and reliability, Refer & Earn, Bill Payments in supported regions, the Radio feature, and regular weekend promotions."
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <div class="script-header">
+                            <div class="script-step-title"><div class="step-badge">4</div><span>Interactive Discovery</span></div>
+                            <i class="fa-solid fa-comments" style="color: var(--primary); font-size: 20px;"></i>
+                        </div>
+                        <div class="agent-label"><i class="fa-solid fa-headset"></i> Agent Says</div>
+                        <div class="speech-bubble">
+                            "May I ask, do you still call family or friends back home? Which country do you usually call? Was there anything in particular that made you stop using FroggyTalk?"
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Active Listening Guidance -->
+            <section id="active-listening">
+                <h2 class="section-title"><i class="fa-solid fa-ear-listen"></i> 💡 Active Listening Guidance</h2>
+                <p class="section-desc">Tailor your responses based on specific customer situations:</p>
+                <div class="grid-two">
+                    <div class="guidance-card">
+                        <div class="guidance-situation"><i class="fa-solid fa-tags" style="color: var(--warning);"></i> Pricing Concerns</div>
+                        <div class="guidance-response">Explain that FroggyTalk regularly runs promotions (especially on weekends) and encourage them to check the latest rates.</div>
+                    </div>
+                    <div class="guidance-card">
+                        <div class="guidance-situation"><i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i> Past Technical Issues</div>
+                        <div class="guidance-response">Apologize for their previous experience and highlight that significant performance improvements have been made.</div>
+                    </div>
+                    <div class="guidance-card">
+                        <div class="guidance-situation"><i class="fa-solid fa-mobile-screen-button" style="color: var(--primary);"></i> Uses Another App</div>
+                        <div class="guidance-response">Acknowledge it gracefully and invite them to try their 2 free minutes to compare call quality.</div>
+                    </div>
+                    <div class="guidance-card">
+                        <div class="guidance-situation"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Free Minutes Inquiry</div>
+                        <div class="guidance-response">Clarify that minutes are already allocated and appear immediately after updating.</div>
+                    </div>
+                    <div class="guidance-card">
+                        <div class="guidance-situation"><i class="fa-solid fa-user-group" style="color: var(--primary);"></i> Why Contacted</div>
+                        <div class="guidance-response">Reassure them that we are reaching out to previous valued customers to share updates and invite them back.</div>
+                    </div>
+                    <div class="guidance-card">
+                        <div class="guidance-situation"><i class="fa-solid fa-headset" style="color: var(--primary);"></i> Update / Login Assistance</div>
+                        <div class="guidance-response">Inform them that Customer Support is available 24/7, including via WhatsApp.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Improvements with Interactive Bill Payments -->
+            <section id="improvements">
+                <h2 class="section-title"><i class="fa-solid fa-sparkles"></i> ✨ Product Improvements to Highlight</h2>
+                <div class="grid-two">
+                    <div class="feature-card-full">
+                        <div class="feature-icon-lg"><i class="fa-solid fa-rocket"></i></div>
+                        <div class="feature-details">
+                            <h3>🚀 Performance & Reliability</h3>
+                            <p>Faster, clearer, and more reliable calling experience.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card-full">
+                        <div class="feature-icon-lg"><i class="fa-solid fa-gift"></i></div>
+                        <div class="feature-details">
+                            <h3>🎁 2 Free Calling Minutes</h3>
+                            <p>Automatically become available after updating the app.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card-full">
+                        <div class="feature-icon-lg"><i class="fa-solid fa-users"></i></div>
+                        <div class="feature-details">
+                            <h3>🤝 Refer & Earn</h3>
+                            <p>Earn rewards by inviting friends and family.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Updated Interactive Bill Payments Card -->
+                    <div class="feature-card-full clickable-feature" id="openBillPaymentsBtn" style="cursor: pointer; position: relative;">
+                        <div class="feature-icon-lg"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                        <div class="feature-details" style="flex-grow: 1;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                                <h3 style="margin-bottom: 0;">💳 Bill Payments</h3>
+                                <span class="badge" style="font-size: 11px; padding: 4px 10px; margin: 0;"><i class="fa-solid fa-up-right-from-square"></i> View 13 Countries</span>
+                            </div>
+                            <p>Pay bills and utilities directly in the app (supported countries only). Click to view all supported destinations & currencies.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card-full">
+                        <div class="feature-icon-lg"><i class="fa-solid fa-radio"></i></div>
+                        <div class="feature-details">
+                            <h3>📻 Radio</h3>
+                            <p>Listen to live radio stations directly within the app.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card-full">
+                        <div class="feature-icon-lg"><i class="fa-solid fa-percent"></i></div>
+                        <div class="feature-details">
+                            <h3>🏷️ Weekend Promotions</h3>
+                            <p>Enjoy regular destination promotions and discounted calling rates.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Promotional Destinations -->
+            <section id="promotions">
+                <h2 class="section-title"><i class="fa-solid fa-globe"></i> 🌍 Current Promotional Destinations</h2>
+                <p class="section-desc">Click a destination below to view the current promotion, applicable day(s), and advertised calling rates.</p>
+
+                <div class="promo-search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="promoSearchInput" class="promo-search-input" placeholder="Search destination (e.g., Nigeria, Ethiopia...)" aria-label="Search promotional destinations">
+                </div>
+
+                <div class="country-grid" id="countryGrid">
+                    <div class="country-card" data-name="Nigeria" data-flag="🇳🇬" data-promo="Weekend Calling Promotion" data-day="Every Saturday" data-offer="2 Hours for €10" data-equiv="120 Minutes" data-rate="€0.083 per minute" data-reminder="Mention this promotion only if the customer regularly calls Nigeria or asks about current offers.">
+                        <span class="country-flag">🇳🇬</span>
+                        <div class="country-name">Nigeria</div>
+                        <span class="promo-badge"><i class="fa-solid fa-bolt"></i> Promotion Active</span>
+                    </div>
+
+                    <div class="country-card" data-name="Ethiopia" data-flag="🇪🇹" data-promo="Weekend Calling Promotion" data-day="Every Sunday" data-offer="70 Minutes for €10" data-equiv="70 Minutes" data-rate="€0.143 per minute" data-reminder="Mention this promotion only if the customer regularly calls Ethiopia or asks about current offers.">
+                        <span class="country-flag">🇪🇹</span>
+                        <div class="country-name">Ethiopia</div>
+                        <span class="promo-badge"><i class="fa-solid fa-bolt"></i> Promotion Active</span>
+                    </div>
+
+                    <div class="country-card" data-name="Sudan" data-flag="🇸🇩" data-promo="Weekend Calling Promotion" data-day="Every Saturday" data-offer="38 Minutes for €10" data-equiv="38 Minutes" data-rate="€0.263 per minute" data-reminder="Mention this promotion only if the customer regularly calls Sudan or asks about current offers.">
+                        <span class="country-flag">🇸🇩</span>
+                        <div class="country-name">Sudan</div>
+                        <span class="promo-badge"><i class="fa-solid fa-bolt"></i> Promotion Active</span>
+                    </div>
+
+                    <div class="country-card" data-name="Eritrea" data-flag="🇪🇷" data-promo="Weekend Calling Promotion" data-day="Every Sunday" data-offer="52 Minutes for €10" data-equiv="52 Minutes" data-rate="€0.192 per minute" data-reminder="Mention this promotion only if the customer regularly calls Eritrea or asks about current offers.">
+                        <span class="country-flag">🇪🇷</span>
+                        <div class="country-name">Eritrea</div>
+                        <span class="promo-badge"><i class="fa-solid fa-bolt"></i> Promotion Active</span>
+                    </div>
+
+                    <div class="country-card" data-name="South Sudan" data-flag="🇸🇸" data-promo="Weekend Calling Promotion" data-day="Check Current Campaign" data-offer="Promotion varies" data-equiv="See latest CRM campaign" data-rate="Varies" data-reminder="Always check the latest CRM promotion before discussing South Sudan offers.">
+                        <span class="country-flag">🇸🇸</span>
+                        <div class="country-name">South Sudan</div>
+                        <span class="promo-badge"><i class="fa-solid fa-bolt"></i> Promotion Active</span>
+                    </div>
+                </div>
+
+                <div class="callout-info">
+                    <i class="fa-solid fa-circle-info" style="font-size: 20px;"></i>
+                    <span>Promotions are updated regularly. Always communicate only the currently active promotion.</span>
+                </div>
+            </section>
+
+            <!-- Discovery Questions -->
+            <section id="discovery">
+                <h2 class="section-title"><i class="fa-solid fa-comments"></i> 💬 Discovery Questions</h2>
+                <p class="section-desc">Use these questions naturally during your conversation:</p>
+                
+                <div class="question-card">
+                    <div class="question-text"><i class="fa-solid fa-circle-question"></i><span>Do you still call family or friends back home?</span></div>
+                    <span class="helper-text">Use naturally during conversation</span>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text"><i class="fa-solid fa-circle-question"></i><span>Which country do you usually call?</span></div>
+                    <span class="helper-text">Use naturally during conversation</span>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text"><i class="fa-solid fa-circle-question"></i><span>Is there anything that stopped you from using FroggyTalk?</span></div>
+                    <span class="helper-text">Use naturally during conversation</span>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text"><i class="fa-solid fa-circle-question"></i><span>Have you used any other calling apps recently?</span></div>
+                    <span class="helper-text">Use naturally during conversation</span>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text"><i class="fa-solid fa-circle-question"></i><span>Is there anything we could improve that would encourage you to come back?</span></div>
+                    <span class="helper-text">Use naturally during conversation</span>
+                </div>
+            </section>
+
+            <!-- Customer FAQs -->
+            <section id="customer-faqs">
+                <h2 class="section-title"><i class="fa-solid fa-circle-question"></i> ❓ Customer FAQs</h2>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>Why are you calling me?</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">We are reaching out to valued previous customers to share exciting new app updates and offer 2 free calling minutes to welcome you back to FroggyTalk.</div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>Why was I selected?</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">You were selected because you are a valued past user of FroggyTalk, and we want to make sure you have access to our latest features and improvements.</div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>Are the 2 free minutes really free?</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">Yes, absolutely! The 2 minutes are completely free with no commitment required.</div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>Why can't I see my free minutes?</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">Your free minutes will automatically become visible as soon as you update to the latest version of the FroggyTalk app.</div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>Do I need to buy anything first?</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">No purchase is required to use your 2 free calling minutes. Simply update the app and place your call.</div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>What's changed in the app?</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">We've improved call quality and connection stability, introduced Refer & Earn rewards, added Bill Payments, live Radio stations, and regular weekend promotions.</div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>Do you still have promotions?</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">Yes! We regularly run weekend promotions and discounted calling rates for various international destinations.</div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>Which countries have promotions?</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">Current active promotional destinations include Nigeria, Ethiopia, Eritrea, Sudan, and South Sudan.</div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>I forgot my password.</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">You can easily reset your password using the 'Forgot Password' link on the login screen, or our 24/7 Customer Support team can assist you via WhatsApp.</div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header"><span>I'm having trouble updating the app.</span><i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="accordion-content"><div class="accordion-body">Please check your app store (Google Play Store or Apple App Store) directly, or I can escalate this to our Customer Support team to help you right away.</div></div>
+                </div>
+            </section>
+
+            <!-- Handling Common Objections -->
+            <section id="objections">
+                <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> 🛡️ Handling Common Objections</h2>
+                
+                <div class="objection-card">
+                    <div class="objection-left"><div class="col-label">Customer Says</div><div class="objection-text">"I already use another calling app."</div></div>
+                    <div class="objection-right"><div class="col-label">Suggested Response</div><div class="response-text">"That's completely fine! Since you already have 2 free minutes waiting in your FroggyTalk account, why not update the app and give us a try on your next call to compare the quality?"</div></div>
+                </div>
+
+                <div class="objection-card">
+                    <div class="objection-left"><div class="col-label">Customer Says</div><div class="objection-text">"Your rates are too expensive."</div></div>
+                    <div class="objection-right"><div class="col-label">Suggested Response</div><div class="response-text">"I understand. We've actually introduced regular weekend promotions and special rates for key destinations. You can use your 2 free minutes first to test out our improved service!"</div></div>
+                </div>
+
+                <div class="objection-card">
+                    <div class="objection-left"><div class="col-label">Customer Says</div><div class="objection-text">"I don't call Africa anymore."</div></div>
+                    <div class="objection-right"><div class="col-label">Suggested Response</div><div class="response-text">"No problem at all! If your calling needs ever change, your account remains open, and you can also use FroggyTalk features like Bill Payments and live Radio."</div></div>
+                </div>
+
+                <div class="objection-card">
+                    <div class="objection-left"><div class="col-label">Customer Says</div><div class="objection-text">"I don't have time right now."</div></div>
+                    <div class="objection-right"><div class="col-label">Suggested Response</div><div class="response-text">"I completely understand! I'll let you go, but please remember your 2 free minutes are waiting for you in the app whenever you're ready. Have a wonderful day!"</div></div>
+                </div>
+
+                <div class="objection-card">
+                    <div class="objection-left"><div class="col-label">Customer Says</div><div class="objection-text">"I had technical issues before."</div></div>
+                    <div class="objection-right"><div class="col-label">Suggested Response</div><div class="response-text">"I really apologize for that past experience. We've made major updates to our network stability recently. We'd love for you to try your 2 free minutes to see the improvement."</div></div>
+                </div>
+
+                <div class="objection-card">
+                    <div class="objection-left"><div class="col-label">Customer Says</div><div class="objection-text">"I don't recognise this number."</div></div>
+                    <div class="objection-right"><div class="col-label">Suggested Response</div><div class="response-text">"I am calling officially on behalf of FroggyTalk to follow up with our valued customers and share our latest app features and free minute offer."</div></div>
+                </div>
+
+                <div class="objection-card">
+                    <div class="objection-left"><div class="col-label">Customer Says</div><div class="objection-text">"I'm not interested."</div></div>
+                    <div class="objection-right"><div class="col-label">Suggested Response</div><div class="response-text">"Thank you for your time today! If you ever decide to return, your 2 free minutes will be waiting after updating the app. Have a great day!"</div></div>
+                </div>
+            </section>
+
+            <!-- Closing the Call -->
+            <section id="closing">
+                <h2 class="section-title"><i class="fa-solid fa-handshake"></i> 👋 Closing the Call</h2>
+                <div class="closing-card">
+                    <i class="fa-solid fa-circle-check closing-icon"></i>
+                    <div class="closing-body">
+                        <h3>Official Call Closing Script</h3>
+                        <div class="closing-text">
+                            "Thank you so much for your time today! Don't forget to update your FroggyTalk app to claim your 2 free minutes. Have a wonderful day!"
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Escalation Guide -->
+            <section id="escalation">
+                <h2 class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> 🚨 Escalation Guide</h2>
+                <p class="section-desc">Escalate directly to Customer Support if the customer:</p>
+                
+                <div class="escalation-tree">
+                    <div class="escalation-card"><div class="escalation-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></div><div class="escalation-text">Cannot update the app.</div></div>
+                    <div class="escalation-card"><div class="escalation-icon"><i class="fa-solid fa-right-to-bracket"></i></div><div class="escalation-text">Cannot log in.</div></div>
+                    <div class="escalation-card"><div class="escalation-icon"><i class="fa-solid fa-eye-slash"></i></div><div class="escalation-text">Cannot see free calling minutes after updating.</div></div>
+                    <div class="escalation-card"><div class="escalation-icon"><i class="fa-solid fa-credit-card"></i></div><div class="escalation-text">Reports payment or billing issues.</div></div>
+                    <div class="escalation-card"><div class="escalation-icon"><i class="fa-solid fa-bug"></i></div><div class="escalation-text">Reports technical bugs.</div></div>
+                    <div class="escalation-card"><div class="escalation-icon"><i class="fa-solid fa-headset"></i></div><div class="escalation-text">Requires assistance beyond the pilot.</div></div>
+                </div>
+            </section>
+
+            <!-- Post-Call Checklist -->
+            <section id="post-call">
+                <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 📝 Post-Call Checklist</h2>
+                <p class="section-desc">Log these details in your workbook immediately after ending each call:</p>
+                <div class="checklist-card">
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')"><div class="checklist-icon"><i class="fa-solid fa-check"></i></div><div class="checklist-text">Call Status</div></div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')"><div class="checklist-icon"><i class="fa-solid fa-check"></i></div><div class="checklist-text">Call Duration</div></div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')"><div class="checklist-icon"><i class="fa-solid fa-check"></i></div><div class="checklist-text">Customer Feedback</div></div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')"><div class="checklist-icon"><i class="fa-solid fa-check"></i></div><div class="checklist-text">Reason for Inactivity</div></div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')"><div class="checklist-icon"><i class="fa-solid fa-check"></i></div><div class="checklist-text">Objections Raised</div></div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')"><div class="checklist-icon"><i class="fa-solid fa-check"></i></div><div class="checklist-text">Follow-up Required</div></div>
+                    <div class="checklist-item" onclick="this.classList.toggle('checked')"><div class="checklist-icon"><i class="fa-solid fa-check"></i></div><div class="checklist-text">Additional Notes</div></div>
+                </div>
+            </section>
+
+            <!-- Quick Calling Tips -->
+            <section id="tips">
+                <h2 class="section-title"><i class="fa-solid fa-lightbulb"></i> 💡 Quick Calling Tips</h2>
+                <div class="grid-three">
+                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-comment-dots"></i></div><div class="tip-title">Be Natural</div></div>
+                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-anchor"></i></div><div class="tip-title">Hook Early</div></div>
+                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-ear-listen"></i></div><div class="tip-title">Listen Actively</div></div>
+                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-sliders"></i></div><div class="tip-title">Tailor the Conversation</div></div>
+                    <div class="tip-card"><div class="tip-icon"><i class="fa-regular fa-clock"></i></div><div class="tip-title">Timing</div></div>
+                    <div class="tip-card"><div class="tip-icon"><i class="fa-solid fa-smile"></i></div><div class="tip-title">Polite Finish</div></div>
+                    <div class="tip-card"><div class="tip-icon"><i class="fa-brands fa-whatsapp"></i></div><div class="tip-title">Promote WhatsApp</div></div>
+                </div>
+            </section>
+
+            <section id="next-steps">
+                <div class="cta-card">
+                    <h2>📞 Ready to Start Calling?</h2>
+                    <p>
+                        Keep this guide open while dialing. Access your assigned customer list in the workbook spreadsheet to log outcomes and feedback in real-time.
+                    </p>
+                    <a href="https://docs.google.com/spreadsheets/d/1Ei2Ra1YLs52J_QZ32hyGl-Y6q4KtJ1apqykGZqHYkII/edit?usp=sharing" target="_blank" class="btn-cta">
+                        <span>Open Workbook Spreadsheet</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- General Video Modal Container -->
+    <div class="modal-backdrop" id="videoModal" aria-hidden="true" role="dialog">
+        <div class="modal-container">
+            <button class="modal-close" id="videoModalClose" aria-label="Close video">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 style="font-size: 20px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;" id="modalVideoTitle">
+                <i class="fa-solid fa-circle-play" style="color: var(--primary);"></i> Video Player
+            </h3>
+            <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px;" id="modalVideoSubtitle">
+                Watch the video session below.
+            </p>
+
+            <div class="video-container">
+                <!-- Video Loading Screen -->
+                <div class="video-loader" id="videoLoader">
+                    <i class="fa-solid fa-circle-notch spinner"></i>
+                    <span style="font-size: 14px; font-weight: 500;">Loading video, please wait...</span>
+                </div>
+                <iframe id="videoIframe" 
+                        src="about:blank" 
+                        allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen 
+                        onload="onVideoLoaded()">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Country Promo Details Modal -->
+    <div class="modal-backdrop" id="promoModal" aria-hidden="true" role="dialog">
+        <div class="modal-container" style="max-width: 580px;">
+            <button class="modal-close" id="promoModalClose" aria-label="Close details">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="promo-modal-header" style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                <span class="modal-country-flag" id="modalFlag" style="font-size: 48px;">🇳🇬</span>
+                <div>
+                    <h3 class="modal-country-name" id="modalCountry" style="font-size: 24px; font-weight: 700;">Nigeria</h3>
+                    <span class="modal-promo-title" id="modalPromo" style="font-size: 14px; font-weight: 600; color: var(--primary);">Weekend Calling Promotion</span>
+                </div>
+            </div>
+            <div class="promo-modal-grid">
+                <div class="modal-detail-card">
+                    <div class="modal-card-icon"><i class="fa-regular fa-calendar-days"></i></div>
+                    <div>
+                        <div class="modal-card-label">Promotion Day</div>
+                        <div class="modal-card-value" id="modalDay">Every Saturday</div>
+                    </div>
+                </div>
+                <div class="modal-detail-card">
+                    <div class="modal-card-icon"><i class="fa-solid fa-gift"></i></div>
+                    <div>
+                        <div class="modal-card-label">Advertised Offer</div>
+                        <div class="modal-card-value" id="modalOffer">2 Hours for €10</div>
+                    </div>
+                </div>
+                <div class="modal-detail-card">
+                    <div class="modal-card-icon"><i class="fa-regular fa-clock"></i></div>
+                    <div>
+                        <div class="modal-card-label">Included Minutes</div>
+                        <div class="modal-card-value" id="modalEquiv">120 Minutes</div>
+                    </div>
+                </div>
+                <div class="modal-detail-card">
+                    <div class="modal-card-icon"><i class="fa-solid fa-calculator"></i></div>
+                    <div>
+                        <div class="modal-card-label">Effective Rate</div>
+                        <div class="modal-card-value" id="modalRate">€0.083 per minute</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-reminder-card">
+                <div class="reminder-header">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    <span>When to Mention</span>
+                </div>
+                <p id="modalReminder">Mention this promotion only if the customer regularly calls Nigeria or asks about current offers.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bill Payments Expanded Modal -->
+    <div class="modal-backdrop" id="billPaymentsModal" aria-hidden="true" role="dialog">
+        <div class="modal-container" style="max-width: 850px; max-height: 90vh; overflow-y: auto;">
+            <button class="modal-close" id="billPaymentsModalClose" aria-label="Close bill payments details">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Header -->
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+                <div class="feature-icon-lg" style="width: 48px; height: 48px; font-size: 20px;"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <div>
+                    <h3 style="font-size: 22px; font-weight: 700; color: var(--text-main);">💳 Bill Payments</h3>
+                    <p style="font-size: 14px; color: var(--text-muted);">Pay bills and utilities directly within the FroggyTalk app in supported countries.</p>
+                </div>
+            </div>
+
+            <!-- Summary & Supported Currencies Cards -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                <div style="background: #F0FDF4; border: 1px solid rgba(0, 168, 107, 0.25); padding: 16px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 12px;">
+                    <i class="fa-solid fa-circle-check" style="font-size: 24px; color: var(--primary);"></i>
+                    <div>
+                        <div style="font-size: 18px; font-weight: 700; color: var(--primary);">13 Supported Countries</div>
+                        <div style="font-size: 12px; color: var(--text-muted);">Direct bill & utility payment coverage</div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md);">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px;">Supported Currencies</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                        <span class="currency-tag">XOF</span>
+                        <span class="currency-tag">XAF</span>
+                        <span class="currency-tag">GHS</span>
+                        <span class="currency-tag">NGN</span>
+                        <span class="currency-tag">ETB</span>
+                        <span class="currency-tag">USD</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Input -->
+            <div class="promo-search-wrapper" style="max-width: 100%; margin-bottom: 20px;">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="billSearchInput" class="promo-search-input" placeholder="Filter by country or currency (e.g., Nigeria, XOF, GHS...)" aria-label="Search supported countries or currencies">
+            </div>
+
+            <!-- Countries Grid -->
+            <div class="bill-countries-grid" id="billCountriesGrid">
+                
+                <div class="bill-country-card" data-country="benin" data-currency="xof">
+                    <span class="bill-country-flag">🇧🇯</span>
+                    <div class="bill-country-name">Benin</div>
+                    <span class="currency-badge">Currency: XOF</span>
+                </div>
+
+                <div class="bill-country-card" data-country="burkina faso" data-currency="xof">
+                    <span class="bill-country-flag">🇧🇫</span>
+                    <div class="bill-country-name">Burkina Faso</div>
+                    <span class="currency-badge">Currency: XOF</span>
+                </div>
+
+                <div class="bill-country-card" data-country="cameroon" data-currency="xaf">
+                    <span class="bill-country-flag">🇨🇲</span>
+                    <div class="bill-country-name">Cameroon</div>
+                    <span class="currency-badge">Currency: XAF</span>
+                </div>
+
+                <div class="bill-country-card" data-country="chad" data-currency="xaf">
+                    <span class="bill-country-flag">🇹🇩</span>
+                    <div class="bill-country-name">Chad</div>
+                    <span class="currency-badge">Currency: XAF</span>
+                </div>
+
+                <div class="bill-country-card" data-country="ghana" data-currency="ghs">
+                    <span class="bill-country-flag">🇬🇭</span>
+                    <div class="bill-country-name">Ghana</div>
+                    <span class="currency-badge">Currency: GHS</span>
+                </div>
+
+                <div class="bill-country-card" data-country="guinea-bissau" data-currency="xof">
+                    <span class="bill-country-flag">🇬🇼</span>
+                    <div class="bill-country-name">Guinea-Bissau</div>
+                    <span class="currency-badge">Currency: XOF</span>
+                </div>
+
+                <div class="bill-country-card" data-country="ivory coast" data-currency="xof">
+                    <span class="bill-country-flag">🇨🇮</span>
+                    <div class="bill-country-name">Ivory Coast</div>
+                    <span class="currency-badge">Currency: XOF</span>
+                </div>
+
+                <div class="bill-country-card" data-country="mali" data-currency="xof">
+                    <span class="bill-country-flag">🇲🇱</span>
+                    <div class="bill-country-name">Mali</div>
+                    <span class="currency-badge">Currency: XOF</span>
+                </div>
+
+                <div class="bill-country-card" data-country="senegal" data-currency="xof">
+                    <span class="bill-country-flag">🇸🇳</span>
+                    <div class="bill-country-name">Senegal</div>
+                    <span class="currency-badge">Currency: XOF</span>
+                </div>
+
+                <div class="bill-country-card" data-country="togo" data-currency="xof">
+                    <span class="bill-country-flag">🇹🇬</span>
+                    <div class="bill-country-name">Togo</div>
+                    <span class="currency-badge">Currency: XOF</span>
+                </div>
+
+                <div class="bill-country-card" data-country="nigeria" data-currency="ngn">
+                    <span class="bill-country-flag">🇳🇬</span>
+                    <div class="bill-country-name">Nigeria</div>
+                    <span class="currency-badge">Currency: NGN</span>
+                </div>
+
+                <div class="bill-country-card" data-country="ethiopia" data-currency="etb">
+                    <span class="bill-country-flag">🇪🇹</span>
+                    <div class="bill-country-name">Ethiopia</div>
+                    <span class="currency-badge">Currency: ETB</span>
+                </div>
+
+                <div class="bill-country-card" data-country="liberia" data-currency="usd">
+                    <span class="bill-country-flag">🇱🇷</span>
+                    <div class="bill-country-name">Liberia</div>
+                    <span class="currency-badge">Currency: USD</span>
+                </div>
+
+            </div>
+
+            <!-- Information Callout -->
+            <div class="callout-info" style="margin-top: 24px; background: #FFFBEB; border-color: #FDE68A; color: #92400E;">
+                <i class="fa-solid fa-circle-info" style="font-size: 20px; color: var(--warning);"></i>
+                <span>ℹ️ Bill Payments are only available in the countries listed above. If a customer asks about another destination, politely explain that support is currently limited to these countries and encourage them to check back for future updates.</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Floating Back To Top Button -->
+    <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+    <!-- Vanilla JavaScript -->
+    <script>
+        // Global function called when the video iframe finishes loading
+        function onVideoLoaded() {
+            const videoIframe = document.getElementById('videoIframe');
+            const videoLoader = document.getElementById('videoLoader');
+            if (videoIframe && videoIframe.src !== "about:blank" && videoLoader) {
+                videoLoader.classList.add('hidden');
+            }
+        }
+
+        // Sidebar Accordion Dropdown Toggle Function
+        function toggleSidebarMenu(menuId) {
+            const dropdown = document.getElementById(menuId);
+            const isOpened = dropdown.classList.contains('open');
+
+            // Close all dropdowns
+            document.querySelectorAll('.sidebar-dropdown').forEach(d => {
+                d.classList.remove('open');
+                d.querySelector('.dropdown-menu').style.maxHeight = null;
+            });
+
+            // Open clicked dropdown if it wasn't open
+            if (!isOpened) {
+                dropdown.classList.add('open');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                menu.style.maxHeight = menu.scrollHeight + "px";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Mobile Sidebar Toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('open');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 992) {
+                        if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                            sidebar.classList.remove('open');
+                        }
+                    }
+                });
+            }
+
+            // 2. Accordions
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const content = item.querySelector('.accordion-content');
+                    const isActive = item.classList.contains('active');
+
+                    document.querySelectorAll('.accordion-item').forEach(i => {
+                        i.classList.remove('active');
+                        i.querySelector('.accordion-content').style.maxHeight = null;
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // 3. Dynamic Navigation Active State & Accordion Auto-Expand
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-item');
+            const homeNavBtn = document.getElementById('homeNavBtn');
+            const progressBar = document.getElementById('progress-bar');
+            const backToTopBtn = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                if (progressBar) progressBar.style.width = scrolled + "%";
+
+                if (winScroll > 400) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    if (pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                // Reset Active States
+                navItems.forEach(item => item.classList.remove('active'));
+                if (homeNavBtn) homeNavBtn.classList.remove('active');
+
+                if (current === 'home') {
+                    if (homeNavBtn) homeNavBtn.classList.add('active');
+                    // Collapse dropdowns when on Home
+                    document.querySelectorAll('.sidebar-dropdown').forEach(d => {
+                        d.classList.remove('open');
+                        d.querySelector('.dropdown-menu').style.maxHeight = null;
+                    });
+                } else {
+                    const activeLink = document.querySelector(`.nav-item[href="#${current}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                        const parentDropdown = activeLink.closest('.sidebar-dropdown');
+                        
+                        // Close other dropdowns and open active one
+                        document.querySelectorAll('.sidebar-dropdown').forEach(d => {
+                            if (d !== parentDropdown) {
+                                d.classList.remove('open');
+                                d.querySelector('.dropdown-menu').style.maxHeight = null;
+                            }
+                        });
+
+                        if (parentDropdown && !parentDropdown.classList.contains('open')) {
+                            parentDropdown.classList.add('open');
+                            const menu = parentDropdown.querySelector('.dropdown-menu');
+                            menu.style.maxHeight = menu.scrollHeight + "px";
+                        }
+                    }
+                }
+            });
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (window.innerWidth <= 992) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            });
+
+            // 4. Video Modal Handlers
+            const videoModal = document.getElementById('videoModal');
+            const openEurosVideoBtn = document.getElementById('openEurosVideoBtn');
+            const openWorkbookVideoBtn = document.getElementById('openWorkbookVideoBtn');
+            const videoModalClose = document.getElementById('videoModalClose');
+            const videoIframe = document.getElementById('videoIframe');
+            const videoLoader = document.getElementById('videoLoader');
+            const modalVideoTitle = document.getElementById('modalVideoTitle');
+            const modalVideoSubtitle = document.getElementById('modalVideoSubtitle');
+
+            // Video URLs
+            // Video URLs
+            const EUROS_VIDEO_URL = "https://www.youtube-nocookie.com/embed/2BWlljymIdE?autoplay=1";;
+            const WORKBOOK_VIDEO_URL = "";
+
+            // Handler for "How do I get my 2euros?" video
+            if (openEurosVideoBtn) {
+                openEurosVideoBtn.addEventListener('click', () => {
+                    if (videoLoader) videoLoader.classList.remove('hidden');
+                    modalVideoTitle.innerHTML = `<i class="fa-solid fa-circle-play" style="color: var(--primary);"></i> How do I get my 2euros?`;
+                    modalVideoSubtitle.textContent = `Watch this quick 1-minute video explaining how your €2 reactivation incentives are earned and verified.`;
+                    videoIframe.src = EUROS_VIDEO_URL;
+                    videoModal.classList.add('active');
+                    videoModal.setAttribute('aria-hidden', 'false');
+                });
+            }
+
+            // Handler for "Workbook Training Video"
+            if (openWorkbookVideoBtn) {
+                openWorkbookVideoBtn.addEventListener('click', () => {
+                    if (!WORKBOOK_VIDEO_URL || WORKBOOK_VIDEO_URL.trim() === "") {
+                        alert("Workbook Training Video link will be available soon!");
+                        return;
+                    }
+                    if (videoLoader) videoLoader.classList.remove('hidden');
+                    modalVideoTitle.innerHTML = `<i class="fa-solid fa-circle-play" style="color: var(--primary);"></i> Workbook Training Video`;
+                    modalVideoSubtitle.textContent = `Watch the full walk-through session on navigating and logging calls in your workbook.`;
+                    videoIframe.src = WORKBOOK_VIDEO_URL;
+                    videoModal.classList.add('active');
+                    videoModal.setAttribute('aria-hidden', 'false');
+                });
+            }
+
+            const closeVideoModal = () => {
+                videoModal.classList.remove('active');
+                videoModal.setAttribute('aria-hidden', 'true');
+                videoIframe.src = "about:blank";
+            };
+
+            if (videoModalClose) videoModalClose.addEventListener('click', closeVideoModal);
+            
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) closeVideoModal();
+            });
+
+            // 5. Promotional Destinations Search & Modal
+            const promoSearchInput = document.getElementById('promoSearchInput');
+            const countryCards = document.querySelectorAll('.country-card');
+            const promoModal = document.getElementById('promoModal');
+            const promoModalClose = document.getElementById('promoModalClose');
+
+            const modalFlag = document.getElementById('modalFlag');
+            const modalCountry = document.getElementById('modalCountry');
+            const modalPromo = document.getElementById('modalPromo');
+            const modalDay = document.getElementById('modalDay');
+            const modalOffer = document.getElementById('modalOffer');
+            const modalEquiv = document.getElementById('modalEquiv');
+            const modalRate = document.getElementById('modalRate');
+            const modalReminder = document.getElementById('modalReminder');
+
+            if (promoSearchInput) {
+                promoSearchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    countryCards.forEach(card => {
+                        const countryName = card.dataset.name.toLowerCase();
+                        if (countryName.includes(query)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            countryCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    modalFlag.textContent = card.dataset.flag;
+                    modalCountry.textContent = card.dataset.name;
+                    modalPromo.textContent = card.dataset.promo;
+                    modalDay.textContent = card.dataset.day;
+                    modalOffer.textContent = card.dataset.offer;
+                    modalEquiv.textContent = card.dataset.equiv;
+                    modalRate.textContent = card.dataset.rate;
+                    modalReminder.textContent = card.dataset.reminder;
+
+                    promoModal.classList.add('active');
+                    promoModal.setAttribute('aria-hidden', 'false');
+                });
+            });
+
+            const closePromoModal = () => {
+                promoModal.classList.remove('active');
+                promoModal.setAttribute('aria-hidden', 'true');
+            };
+
+            if (promoModalClose) promoModalClose.addEventListener('click', closePromoModal);
+
+            promoModal.addEventListener('click', (e) => {
+                if (e.target === promoModal) closePromoModal();
+            });
+
+            // 6. Bill Payments Interactive Modal Logic
+            const billPaymentsModal = document.getElementById('billPaymentsModal');
+            const openBillPaymentsBtn = document.getElementById('openBillPaymentsBtn');
+            const billPaymentsModalClose = document.getElementById('billPaymentsModalClose');
+            const billSearchInput = document.getElementById('billSearchInput');
+            const billCountryCards = document.querySelectorAll('.bill-country-card');
+
+            if (openBillPaymentsBtn) {
+                openBillPaymentsBtn.addEventListener('click', () => {
+                    billPaymentsModal.classList.add('active');
+                    billPaymentsModal.setAttribute('aria-hidden', 'false');
+                });
+            }
+
+            const closeBillModal = () => {
+                billPaymentsModal.classList.remove('active');
+                billPaymentsModal.setAttribute('aria-hidden', 'true');
+            };
+
+            if (billPaymentsModalClose) {
+                billPaymentsModalClose.addEventListener('click', closeBillModal);
+            }
+
+            billPaymentsModal.addEventListener('click', (e) => {
+                if (e.target === billPaymentsModal) closeBillModal();
+            });
+
+            if (billSearchInput) {
+                billSearchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    
+                    billCountryCards.forEach(card => {
+                        const country = card.dataset.country.toLowerCase();
+                        const currency = card.dataset.currency.toLowerCase();
+                        
+                        if (country.includes(query) || currency.includes(query)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            // ESC Key Handler for ALL modals
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (videoModal.classList.contains('active')) closeVideoModal();
+                    if (promoModal.classList.contains('active')) closePromoModal();
+                    if (billPaymentsModal.classList.contains('active')) closeBillModal();
+                }
+            });
+
+            // 7. Global Search Engine
+            const globalSearchInput = document.getElementById('globalSearchInput');
+            const searchResultsPanel = document.getElementById('searchResultsPanel');
+            const searchResultsList = document.getElementById('searchResultsList');
+
+            const searchableElements = document.querySelectorAll('section[id], .script-card, .accordion-item, .country-card, .objection-card, .bill-country-card');
+
+            if (globalSearchInput) {
+                globalSearchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    searchResultsList.innerHTML = '';
+
+                    if (query.length < 2) {
+                        searchResultsPanel.classList.remove('active');
+                        return;
+                    }
+
+                    let matchesCount = 0;
+                    searchableElements.forEach(el => {
+                        const text = el.innerText || el.textContent;
+                        if (text.toLowerCase().includes(query) && matchesCount < 6) {
+                            matchesCount++;
+                            
+                            let title = "Search Result";
+                            const heading = el.querySelector('h1, h2, h3, .script-step-title, .country-name, .bill-country-name, .accordion-header, .objection-text');
+                            if (heading) title = heading.innerText.trim();
+
+                            const resultItem = document.createElement('div');
+                            resultItem.className = 'search-result-item';
+                            resultItem.innerHTML = `
+                                <div class="search-title">${title}</div>
+                                <div class="search-snippet">${text.substring(0, 110).trim()}...</div>
+                            `;
+
+                            resultItem.addEventListener('click', () => {
+                                searchResultsPanel.classList.remove('active');
+                                globalSearchInput.value = '';
+                                
+                                closeVideoModal();
+                                closePromoModal();
+                                closeBillModal();
+
+                                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                
+                                el.style.outline = '2px solid var(--primary)';
+                                setTimeout(() => { el.style.outline = 'none'; }, 2000);
+                            });
+
+                            searchResultsList.appendChild(resultItem);
+                        }
+                    });
+
+                    if (matchesCount > 0) {
+                        searchResultsPanel.classList.add('active');
+                    } else {
+                        searchResultsPanel.classList.add('active');
+                        searchResultsList.innerHTML = '<div style="padding: 10px; color: var(--text-muted); font-size: 14px;">No matching results found.</div>';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
