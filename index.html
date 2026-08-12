@@ -3826,17 +3826,18 @@
         let currentPricingMode = 'promo';
 
         // PROMOTIONAL RATES MATRIX (Destination + Currency Rate)
-        const promoRatesData = {
-            "Eritrea (Landline & Mobile)":  { EUR: 0.17, CAD: 0.28, SEK: 1.99, GBP: 0.15, NOK: 2.01, DKK: 1.27, USD: 0.20, SAR: 0.74, AUD: 0.30 },
-            "Ethiopia (Landline & Mobile)": { EUR: 0.142857, CAD: 0.23, SEK: 1.67, GBP: 0.12, NOK: 1.69, DKK: 1.07, USD: 0.17, SAR: 0.62, AUD: 0.25 },
-            "Nigeria (Landline & Mobile)":  { EUR: 0.083333, CAD: 0.13, SEK: 0.93, GBP: 0.07, NOK: 0.95, DKK: 0.60, USD: 0.09, SAR: 0.35, AUD: 0.14 },
-            "Sudan (Landline & Mobile)":    { EUR: 0.26, CAD: 0.42, SEK: 3.04, GBP: 0.23, NOK: 3.08, DKK: 1.94, USD: 0.31, SAR: 1.13, AUD: 0.46 },
-            "South Sudan (Landline)":       { EUR: 0.36, CAD: 0.58, SEK: 4.21, GBP: 0.31, NOK: 4.26, DKK: 2.69, USD: 0.42, SAR: 1.56, AUD: 0.63 },
-            "South Sudan (Mobile)":         { EUR: 0.36, CAD: 0.58, SEK: 4.21, GBP: 0.31, NOK: 4.26, DKK: 2.69, USD: 0.42, SAR: 1.56, AUD: 0.63 },
-            "Chad":                       { EUR: 0.454545, CAD: 0.73, SEK: 5.25, GBP: 0.39, NOK: 5.32, DKK: 3.35, USD: 0.54, SAR: 1.97, AUD: 0.73 },
-            "Central African Republic":   { EUR: 0.434783, CAD: 0.70, SEK: 5.02, GBP: 0.37, NOK: 5.09, DKK: 3.20, USD: 0.52, SAR: 1.88, AUD: 0.70 },
-            "Yemen":                      { EUR: 0.10,     CAD: 0.16, SEK: 1.15, GBP: 0.08, NOK: 1.17, DKK: 0.74, USD: 0.12, SAR: 0.43, AUD: 0.16 }
-        };
+      // PROMOTIONAL RATES MATRIX
+const promoRatesData = {
+    "Eritrea (Landline & Mobile)":  { EUR: 0.153846, CAD: 0.25, SEK: 1.79, GBP: 0.13, NOK: 1.82, DKK: 1.14, USD: 0.18, SAR: 0.67, AUD: 0.28 },
+    "Ethiopia (Landline & Mobile)": { EUR: 0.142857, CAD: 0.23, SEK: 1.67, GBP: 0.12, NOK: 1.69, DKK: 1.07, USD: 0.17, SAR: 0.62, AUD: 0.25 },
+    "Nigeria (Landline & Mobile)":  { EUR: 0.083333, CAD: 0.13, SEK: 0.93, GBP: 0.07, NOK: 0.95, DKK: 0.60, USD: 0.09, SAR: 0.35, AUD: 0.14 },
+    "Sudan (Landline & Mobile)":    { EUR: 0.263158, CAD: 0.42, SEK: 3.04, GBP: 0.23, NOK: 3.08, DKK: 1.94, USD: 0.31, SAR: 1.13, AUD: 0.46 },
+    "South Sudan (Landline)":       { EUR: 0.36, CAD: 0.58, SEK: 4.21, GBP: 0.31, NOK: 4.26, DKK: 2.69, USD: 0.42, SAR: 1.56, AUD: 0.63 },
+    "South Sudan (Mobile)":         { EUR: 0.36, CAD: 0.58, SEK: 4.21, GBP: 0.31, NOK: 4.26, DKK: 2.69, USD: 0.42, SAR: 1.56, AUD: 0.63 },
+    "Chad":                         { EUR: 0.454545, CAD: 0.73, SEK: 5.25, GBP: 0.39, NOK: 5.32, DKK: 3.35, USD: 0.54, SAR: 1.97, AUD: 0.73 },
+    "Central African Republic":     { EUR: 0.434783, CAD: 0.70, SEK: 5.02, GBP: 0.37, NOK: 5.09, DKK: 3.20, USD: 0.52, SAR: 1.88, AUD: 0.70 },
+    "Yemen":                        { EUR: 0.10, CAD: 0.16, SEK: 1.15, GBP: 0.08, NOK: 1.17, DKK: 0.74, USD: 0.12, SAR: 0.43, AUD: 0.16 }
+};
 
         // STANDARD RATES MATRIX (Destination + Currency Rate)
         const standardRatesData = {
